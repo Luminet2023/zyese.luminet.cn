@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050a16" />
+    <link rel="preload" href="/assets/fonts/atkinson-hyperlegible-next/AtkinsonHyperlegibleNext-Bold-Latin.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="robots" content="noindex" />
+    <title>Zyese 竞技模式 S1</title>
+    <script type="module" crossorigin src="/assets/arena-DzrQpQNZ.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+    <link rel="modulepreload" crossorigin href="/assets/snapshot-smoothing-D4SqjIUs.js">
+    <link rel="stylesheet" crossorigin href="/assets/arena-CvqaK69D.css">
+  </head>
+  <body>
+    <main id="mobileGate" class="arena-gate" hidden>
+      <div><span class="arena-kicker">ZYESE ARENA · S1 TEST</span><h1>手机版暂不支持竞技对战</h1><p>竞技模式需要同时显示双方战场，请使用电脑浏览器进入。</p><a href="/">返回主界面</a></div>
+    </main>
+    <main id="authGate" class="arena-gate" hidden>
+      <div><span class="arena-kicker">ZYESE ARENA · S1 TEST</span><h1>请先登录</h1><p>竞技模式需要登录账号才能加入匹配。</p><a href="/">返回登录</a></div>
+    </main>
+    <main id="arenaApp" class="arena-shell" hidden>
+      <header class="arena-topbar">
+        <a href="/" class="arena-brand">ZYESE</a>
+        <div class="arena-season"><span id="arenaVersion">S1 TEST · v0.8.0</span><strong>竞技测试赛季</strong></div>
+        <div class="arena-clock"><span>剩余时间</span><strong id="matchClock">03:00</strong></div>
+        <div id="arenaConnection" class="arena-connection">尚未匹配</div>
+        <button id="arenaSoundButton" class="arena-icon-button" type="button" aria-label="关闭声音">♪</button>
+        <button id="surrenderButton" class="arena-danger-link" type="button" hidden>认输退出</button>
+      </header>
+
+      <section class="duel-grid" aria-label="竞技双战场">
+        <article class="duel-panel duel-self">
+          <header><div><span>我的战场</span><strong id="selfName">@PLAYER</strong></div><div class="duel-panel-stats"><b id="selfScore">000000</b><span id="selfMeta">第1波 · x1</span></div></header>
+          <div class="duel-stage"><canvas id="selfCanvas" width="480" height="720"></canvas><div id="selfConnectionMask" class="duel-connection-mask" hidden>正在重新连接 · 15秒</div></div>
+        </article>
+        <div class="duel-divider"><span>VS</span><i id="scoreLead">等待开战</i></div>
+        <article class="duel-panel duel-opponent">
+          <header><div><span>对手战场</span><strong id="opponentName">@OPPONENT</strong></div><div class="duel-panel-stats"><b id="opponentScore">000000</b><span id="opponentMeta">第1波 · x1</span></div></header>
+          <div class="duel-stage"><canvas id="opponentCanvas" width="480" height="720"></canvas><div id="opponentConnectionMask" class="duel-connection-mask" hidden>对手重连中 · 15秒</div></div>
+        </article>
+      </section>
+
+      <section id="lobbyPanel" class="arena-overlay-card">
+        <span class="arena-kicker">DESKTOP ONLY · S1 TEST</span>
+        <h1>双屏竞技对战</h1>
+        <p>双方使用相同敌机时间轴，各自输入与击毁。碰撞、认输或断线超时立即判负；坚持3分钟后依次比较得分、击毁、准确率和最高连击。</p>
+        <div class="lobby-rating"><span>S1 匹配分</span><strong id="myArenaRating">1000</strong><small id="myArenaRecord">0胜 · 0负 · 0平</small></div>
+        <button id="joinQueueButton" class="arena-primary" type="button">开始匹配</button>
+        <button id="openArenaLeaderboard" class="arena-secondary" type="button">查看 S1 排行榜</button>
+        <a href="/" class="arena-back">返回单人模式</a>
+      </section>
+
+      <section id="queuePanel" class="arena-overlay-card" hidden>
+        <span class="arena-kicker">MATCHMAKING</span><h2>正在匹配对手</h2>
+        <div class="queue-radar"><i></i><b></b><span></span></div>
+        <p id="queueStatus">正在连接匹配服务器</p><strong id="queueTimer">00:00</strong>
+        <button id="cancelQueueButton" class="arena-secondary" type="button">取消匹配</button>
+      </section>
+
+      <section id="confirmPanel" class="arena-overlay-card arena-confirm-card" hidden>
+        <span class="arena-kicker">MATCH FOUND</span><h2>匹配成功</h2>
+        <div class="confirm-versus"><div><span>我方</span><strong id="confirmSelfName">@PLAYER</strong><b id="confirmSelfState">等待确认</b></div><i>VS</i><div><span>对手</span><strong id="confirmOpponentName">@OPPONENT</strong><b id="confirmOpponentState">等待确认</b></div></div>
+        <p><strong id="confirmTimer">15</strong> 秒后自动取消</p>
+        <div class="confirm-actions"><button id="confirmMatchButton" class="arena-primary" type="button">确认出战</button><button id="declineMatchButton" class="arena-secondary" type="button">取消匹配</button></div>
+      </section>
+
+      <section id="countdownPanel" class="arena-countdown" hidden><span id="countdownValue">3</span><strong>准备开火</strong></section>
+
+      <section id="resultPanel" class="arena-overlay-card arena-result-card" hidden>
+        <span class="arena-kicker">MATCH COMPLETE</span><h2 id="arenaResultTitle">胜利</h2><p id="arenaResultReason">比赛结束</p><p id="arenaResultBasis" class="arena-result-basis"></p>
+        <div class="arena-result-table"><div></div><b>我方</b><b>对手</b><span>得分</span><strong id="resultSelfScore">0</strong><strong id="resultOpponentScore">0</strong><span>击毁</span><strong id="resultSelfKills">0</strong><strong id="resultOpponentKills">0</strong><span>准确率</span><strong id="resultSelfAccuracy">100%</strong><strong id="resultOpponentAccuracy">100%</strong><span>最高连击</span><strong id="resultSelfStreak">0</strong><strong id="resultOpponentStreak">0</strong><span>S1匹配分</span><strong id="resultSelfRating">1000</strong><strong id="resultOpponentRating">1000</strong></div>
+        <div class="confirm-actions"><button id="matchAgainButton" class="arena-primary" type="button">继续匹配</button><button id="resultLeaderboardButton" class="arena-secondary" type="button">查看 S1 排行榜</button><a href="/" class="arena-back-button">返回主界面</a></div>
+      </section>
+    </main>
+
+    <dialog id="surrenderDialog" class="arena-dialog"><div><h2>确认认输？</h2><p>竞技比赛不会暂停，确认后将直接判负。</p><div><button id="confirmSurrender" class="arena-danger" type="button">认输退出</button><button id="cancelSurrender" class="arena-secondary" type="button">继续比赛</button></div></div></dialog>
+    <dialog id="arenaLeaderboardDialog" class="arena-dialog arena-leaderboard-dialog"><div><div class="arena-dialog-heading"><div><span class="arena-kicker">S1 TEST</span><h2>竞技排行榜</h2></div><button id="closeArenaLeaderboard" type="button">×</button></div><p id="arenaLeaderboardStatus">正在读取</p><ol id="arenaLeaderboardList"></ol></div></dialog>
+  </body>
+</html>

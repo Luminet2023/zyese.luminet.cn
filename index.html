@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b18" />
+    <link rel="preload" href="/assets/fonts/atkinson-hyperlegible-next/AtkinsonHyperlegibleNext-Bold-Latin.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="description" content="Zyese 是一款支持英文单词和中文词语、成语的太空打字射击游戏。逐字发射，挑战每日排行和最高分。" />
+    <link rel="canonical" href="https://zyese.xyz/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Zyese" />
+    <meta property="og:title" content="Zyese - 打字射击" />
+    <meta property="og:description" content="输入英文单词或中文词语、成语，逐字发射，在不断加速的太空战场挑战最高分。" />
+    <meta property="og:url" content="https://zyese.xyz/" />
+    <meta property="og:image" content="https://zyese.xyz/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Zyese - 打字射击" />
+    <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
+    <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
+    <title>Zyese - 打字射击</title>
+    <script type="module" crossorigin src="/assets/game-CUiqZkHS.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+    <link rel="modulepreload" crossorigin href="/assets/snapshot-smoothing-D4SqjIUs.js">
+    <link rel="stylesheet" crossorigin href="/assets/game-WTtRMVn8.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="game-frame" aria-label="Zyese 打字射击游戏">
+        <header class="topbar">
+          <a class="brand" href="/" aria-label="Zyese 首页">ZYESE</a>
+          <div class="stats" aria-live="polite">
+            <div class="stat"><span class="stat-label">得分</span><strong id="score">000000</strong></div>
+            <div class="stat"><span class="stat-label">波次</span><strong id="wave">001</strong></div>
+            <div class="stat"><span class="stat-label">连击</span><strong id="streak">x0</strong></div>
+            <div class="stat"><span class="stat-label">准确率</span><strong id="accuracy">100%</strong></div>
+          </div>
+          <button id="leaderboardButton" class="icon-button leaderboard-button" type="button" aria-label="打开排行榜" title="打开排行榜">榜单</button>
+          <button id="soundButton" class="icon-button sound-button" type="button" aria-label="关闭声音" title="关闭声音">♪</button>
+          <button id="pauseButton" class="icon-button game-control-button" type="button" aria-label="暂停游戏" title="暂停游戏" hidden>暂停</button>
+        </header>
+
+        <div class="stage-wrap">
+          <canvas id="gameCanvas" width="960" height="640"></canvas>
+          <div id="speedHud" class="speed-hud" hidden aria-live="polite"><span>速度</span><strong id="speed">1.0x</strong></div>
+          <div id="waveAnnouncement" class="wave-announcement" hidden aria-live="polite">
+            <strong id="waveAnnouncementTitle">第 2 波开始</strong>
+            <span id="waveAnnouncementDetail">敌方编队正在逼近</span>
+          </div>
+          <div id="menuOverlay" class="overlay overlay-menu">
+            <div class="title-lockup">
+              <span id="gameplayEyebrow" class="eyebrow">输入单词，开火</span>
+              <div class="hero-title-wrap">
+                <svg class="hero-electric-field" viewBox="0 0 420 160" aria-hidden="true" focusable="false">
+                  <path class="hero-arc hero-arc-a" d="M24 83L47 52L72 59L93 26L125 38L153 15L184 31L218 13L248 34L281 20L305 47L344 35L358 63L395 76L374 103L389 124L350 128L326 149L294 136L263 153L230 137L195 151L165 132L126 145L105 119L66 125L58 101Z" />
+                  <path class="hero-arc hero-arc-b" d="M45 111L76 83L91 99L120 58L149 73L179 42L209 61L239 38L267 66L304 52L319 84L368 88L346 113L366 128L326 134L301 147L267 132L232 149L201 131L166 145L137 124L98 135L80 112Z" />
+                  <path class="hero-arc hero-arc-c" d="M70 49L104 37L119 57L151 24L174 48L210 27L236 53L273 35L288 64L327 58L343 88L359 105L322 113L297 137L267 116L231 136L204 111L168 130L143 102L102 112L92 78Z" />
+                  <path class="hero-branch hero-branch-a" d="M52 45L34 28L27 12" />
+                  <path class="hero-branch hero-branch-b" d="M369 113L397 126L411 143" />
+                  <path class="hero-branch hero-branch-c" d="M285 25L299 7L318 1" />
+                  <circle class="hero-spark hero-spark-a" cx="52" cy="45" r="2.4" />
+                  <circle class="hero-spark hero-spark-b" cx="369" cy="113" r="2" />
+                  <circle class="hero-spark hero-spark-c" cx="285" cy="25" r="1.8" />
+                </svg>
+                <h1 class="hero-title" data-text="Zyese">Zyese</h1>
+                <span class="hero-rift hero-rift-a" aria-hidden="true"></span>
+                <span class="hero-rift hero-rift-b" aria-hidden="true"></span>
+              </div>
+              <p>挑战最高波次</p>
+            </div>
+            <div id="authPanel" class="auth-panel" aria-live="polite">
+              <div id="authSignedOut" class="auth-signed-out">
+                <p id="authMessage" class="auth-message">登录后保存成绩并参与排行榜</p>
+                <button id="loginButton" class="linuxdo-login-button" type="button">使用 Linux.do 登录</button>
+                <div class="auth-divider"><span>或</span></div>
+                <button id="inviteLoginButton" class="youth-login-button" type="button">青春版登录</button>
+                <p class="invite-register-prompt">有邀请码？<button id="inviteRegisterButton" type="button">立即注册青春版账号</button></p>
+              </div>
+              <div id="authSignedIn" class="auth-signed-in" hidden>
+                <img id="authAvatar" alt="" width="38" height="38" />
+                <div><strong id="authUsername"></strong><span id="authStatus">Linux.do 已登录</span></div>
+                <button id="logoutButton" class="auth-logout-button" type="button">退出</button>
+              </div>
+            </div>
+            <button id="startButton" class="primary-button start-game-button" type="button" disabled><span>正在检查登录状态</span><i class="start-button-edge start-button-edge-top" aria-hidden="true"></i><i class="start-button-edge start-button-edge-bottom" aria-hidden="true"></i><i class="start-button-spark start-button-spark-left" aria-hidden="true"></i><i class="start-button-spark start-button-spark-right" aria-hidden="true"></i></button>
+            <p id="controlHint" class="control-hint">点击开始后选择游戏模式 · 空格取消锁定</p>
+            <p id="connectionNotice" class="connection-notice" hidden></p>
+            <div class="menu-secondary-actions"><button id="skinSettingsButton" class="secondary-button" type="button" disabled>皮肤设置</button><button id="gameGuideButton" class="secondary-button" type="button">游戏说明</button><button id="menuLeaderboardButton" class="secondary-button" type="button">查看排行榜</button><button id="gameSettingsButton" class="secondary-button" type="button">游戏设置</button><button id="flightSummaryButton" class="secondary-button" type="button" disabled>起飞总结</button><button id="updateAnnouncementButton" class="secondary-button" type="button">更新公告</button></div>
+            <div class="personal-best">
+              <select id="bestScoreModeSelect" class="best-score-mode-select" aria-label="选择个人最高分模式">
+                <option value="en">英文单人</option>
+                <option value="zh">中文单人</option>
+                <option value="hell-en">地狱英文</option>
+                <option value="hell-zh">地狱无门</option>
+              </select>
+              <span>个人最高分</span> <strong id="bestScore">000000</strong>
+            </div>
+            <div class="menu-links">
+              <a class="support-link" href="https://credit.linux.do/paying/online?token=12ce21a9e3034995c23d1974dec8cd871773261ab537f99d04ec45c3fc5f49e3" target="_blank" rel="noopener noreferrer">投喂白夜 10 LDC 以作支持</a>
+              <a class="purchase-link" href="https://ldcstore.com/product/11895" target="_blank" rel="noopener noreferrer">为朋友购买注册码</a>
+              <a class="feedback-link" href="mailto:x203117117@gmail.com?subject=Zyese%20Bug%2F%E5%BB%BA%E8%AE%AE">Bug/建议请发送邮件至 x203117117@gmail.com</a>
+            </div>
+          </div>
+          <div id="gameOverOverlay" class="overlay overlay-result" hidden>
+            <span class="eyebrow">本局结束</span>
+            <h2 id="gameOverTitle">你打完了一把飞机</h2>
+            <p id="antiCheatNotice" class="anti-cheat-notice" hidden>作弊无法上榜，你还是打自己的飞机吧！</p>
+            <div id="settlementPanel" class="settlement-panel" aria-live="polite">
+              <div class="settlement-kicker">结算中 <span id="settlementProgress">0 / 7</span></div>
+              <div class="settlement-steps">
+                <div class="settlement-step" data-settlement-step="base"><span>基础得分</span><strong id="settlementBaseScore">000000</strong></div>
+                <div class="settlement-step" data-settlement-step="kills"><span>击杀目标</span><strong id="settlementKills">0</strong></div>
+                <div class="settlement-step" data-settlement-step="streak"><span>最高连击</span><strong id="settlementStreak">x0</strong></div>
+                <div class="settlement-step" data-settlement-step="mobile"><span>手机加权</span><strong id="settlementMobileBonus">+000000</strong></div>
+                <div class="settlement-step" data-settlement-step="accuracy"><span>准确率</span><strong id="settlementAccuracy">100%</strong></div>
+                <div class="settlement-step" data-settlement-step="eapm"><span>EAPM 有效操作/分钟</span><strong id="settlementEapm">0</strong></div>
+                <div class="settlement-step" data-settlement-step="wave"><span>到达波次</span><strong id="settlementWave">001</strong></div>
+                <div class="settlement-step" data-settlement-step="rating"><span>本局评分</span><strong id="settlementRating">F- · 0</strong></div>
+              </div>
+              <div class="settlement-final" data-settlement-step="final"><span>最终得分</span><strong id="finalScore">000000</strong></div>
+            </div>
+            <div class="result-grid-legacy" hidden><strong id="finalWave">001</strong><strong id="finalStreak">0</strong><strong id="finalAccuracy">100%</strong></div>
+            <p id="uploadStatus" class="upload-status" aria-live="polite">成绩将在本局结束后上传</p>
+            <div id="signaturePanel" class="signature-panel" hidden>
+              <strong>前十榜单签名</strong>
+              <p>今日榜和总榜签名相互独立；同时进入两个榜单时需要分别保存。</p>
+              <div id="signatureEntries" class="signature-entries"></div>
+            </div>
+            <div class="result-actions"><button id="restartButton" class="primary-button" type="button">再玩一次</button><button id="resultLeaderboardButton" class="secondary-button" type="button">查看排行榜</button><button id="resultExitButton" class="secondary-button" type="button">返回主界面</button></div>
+          </div>
+          <div id="pauseOverlay" class="overlay overlay-pause" hidden>
+            <span class="eyebrow">游戏暂停</span>
+            <h2 id="pauseTitle">保持警戒</h2>
+            <p id="pauseStatus" class="pause-status">本局计时已经暂停</p>
+            <div class="pause-actions">
+              <button id="resumeButton" class="primary-button" type="button">继续游戏</button>
+              <button id="pauseRestartButton" class="secondary-button" type="button">重新开始</button>
+              <button id="pauseExitButton" class="danger-button" type="button">退出游戏</button>
+            </div>
+          </div>
+          <div id="connectingOverlay" class="overlay overlay-connecting" hidden>
+            <span class="eyebrow">正在建立权威对局</span>
+            <h2>连接服务器</h2>
+            <p id="connectingStatus">正在验证排行榜会话</p>
+          </div>
+          <div id="leaderboardOverlay" class="overlay leaderboard-overlay" hidden>
+            <div class="leaderboard-dialog" role="dialog" aria-modal="true" aria-labelledby="leaderboardTitle">
+              <div class="leaderboard-heading">
+                <div><span class="eyebrow">ZYESE</span><h2 id="leaderboardTitle">排行榜</h2></div>
+                <div class="leaderboard-heading-actions">
+                  <button id="mySignaturesButton" class="secondary-button my-signatures-button" type="button" hidden>我的签名</button>
+                  <button id="leaderboardClose" class="close-button" type="button" aria-label="关闭排行榜" title="关闭排行榜">×</button>
+                </div>
+              </div>
+              <div id="leaderboardTabs" class="leaderboard-tabs" role="tablist" aria-label="排行榜类型">
+                <section class="leaderboard-group"><span>常规</span><div><button class="tab-button active" type="button" data-board="daily" role="tab" aria-selected="true">英文今日</button><button class="tab-button" type="button" data-board="all-time" role="tab" aria-selected="false">英文总榜</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-daily" role="tab" aria-selected="false">中文今日</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-all-time" role="tab" aria-selected="false">中文总榜</button></div></section>
+                <section class="leaderboard-group leaderboard-hell-group"><span>地狱</span><div><button class="tab-button hell-tab-button" type="button" data-board="hell-en-daily" role="tab" aria-selected="false">地狱英文今日</button><button class="tab-button hell-tab-button" type="button" data-board="hell-en-all-time" role="tab" aria-selected="false">地狱英文总榜</button><button class="tab-button hell-tab-button" type="button" data-board="hell-zh-daily" role="tab" aria-selected="false">地狱无门今日</button><button class="tab-button hell-tab-button" type="button" data-board="hell-zh-all-time" role="tab" aria-selected="false">地狱无门总榜</button></div></section>
+                <section class="leaderboard-group leaderboard-arena-group"><span>竞技</span><div><button class="tab-button arena-tab-button" type="button" data-board="arena" role="tab" aria-selected="false">竞技 S1</button></div></section>
+              </div>
+              <div id="leaderboardSelfSignatureBar" class="leaderboard-self-bar" hidden>
+                <div class="leaderboard-self-summary">
+                  <div class="leaderboard-self-info">
+                    <span class="leaderboard-self-badge">前十在榜</span>
+                    <span id="leaderboardSelfRankText" class="leaderboard-self-rank">第 1 名</span>
+                    <span id="leaderboardSelfSignaturePreview" class="leaderboard-self-preview"></span>
+                  </div>
+                  <button id="leaderboardEditSignatureBtn" class="secondary-button signature-action-btn" type="button">修改签名</button>
+                </div>
+                <form id="leaderboardSignatureEditor" class="leaderboard-signature-editor" hidden>
+                  <div class="signature-editor-inputs">
+                    <div class="signature-input-wrap">
+                      <input id="leaderboardSignatureInput" type="text" maxlength="32" autocomplete="off" placeholder="写下你的签名（最多32字，留空提交可清空）" />
+                      <span id="leaderboardSignatureCharCount" class="char-count">0/32</span>
+                    </div>
+                    <div class="signature-editor-actions">
+                      <button id="leaderboardSaveSignatureBtn" class="primary-button" type="submit">保存</button>
+                      <button id="leaderboardClearSignatureBtn" class="secondary-button" type="button">清空</button>
+                      <button id="leaderboardCancelSignatureBtn" class="secondary-button" type="button">取消</button>
+                    </div>
+                  </div>
+                  <small id="leaderboardSignatureStatus" class="signature-status" aria-live="polite"></small>
+                </form>
+              </div>
+              <div id="leaderboardState" class="leaderboard-state">正在读取排行榜</div>
+              <ol id="leaderboardList" class="leaderboard-list"></ol>
+              <div id="personalStats" class="personal-stats" hidden></div>
+              <div id="mySignaturesView" class="my-signatures-view" hidden>
+                <div class="my-signatures-heading">
+                  <div>
+                    <h3>我的上榜签名</h3>
+                    <p>单人模式今日榜与总榜排名前十可设置个性签名，最多 32 字符。</p>
+                  </div>
+                  <button id="mySignaturesBackBtn" class="secondary-button" type="button">返回排行榜</button>
+                </div>
+                <div id="mySignaturesList" class="my-signatures-list"></div>
+                <div id="mySignaturesEmpty" class="my-signatures-empty" hidden>暂无在榜前十记录，快去挑战榜单吧！</div>
+              </div>
+            </div>
+          </div>
+          <div id="startTransition" class="start-transition" hidden aria-hidden="true">
+            <div class="start-transition-panel start-transition-panel-left"></div>
+            <div class="start-transition-panel start-transition-panel-right"></div>
+            <svg class="start-transition-bolt" viewBox="0 0 480 720" preserveAspectRatio="none" aria-hidden="true">
+              <path class="start-bolt-glow" d="M480 0L438 64L451 116L394 181L409 236L352 300L366 354L306 421L321 478L256 541L270 598L190 658L0 720" />
+              <path class="start-bolt-core" d="M480 0L438 64L451 116L394 181L409 236L352 300L366 354L306 421L321 478L256 541L270 598L190 658L0 720" />
+            </svg>
+          </div>
+        </div>
+
+        <div id="virtualKeyboard" class="virtual-keyboard" hidden aria-label="游戏虚拟键盘">
+          <div class="keyboard-row keyboard-row-top">
+            <button class="keyboard-key" type="button" data-key="q">q</button>
+            <button class="keyboard-key" type="button" data-key="w">w</button>
+            <button class="keyboard-key" type="button" data-key="e">e</button>
+            <button class="keyboard-key" type="button" data-key="r">r</button>
+            <button class="keyboard-key" type="button" data-key="t">t</button>
+            <button class="keyboard-key" type="button" data-key="y">y</button>
+            <button class="keyboard-key" type="button" data-key="u">u</button>
+            <button class="keyboard-key" type="button" data-key="i">i</button>
+            <button class="keyboard-key" type="button" data-key="o">o</button>
+            <button class="keyboard-key" type="button" data-key="p">p</button>
+          </div>
+          <div class="keyboard-row keyboard-row-middle">
+            <button class="keyboard-key" type="button" data-key="a">a</button>
+            <button class="keyboard-key" type="button" data-key="s">s</button>
+            <button class="keyboard-key" type="button" data-key="d">d</button>
+            <button class="keyboard-key" type="button" data-key="f">f</button>
+            <button class="keyboard-key" type="button" data-key="g">g</button>
+            <button class="keyboard-key" type="button" data-key="h">h</button>
+            <button class="keyboard-key" type="button" data-key="j">j</button>
+            <button class="keyboard-key" type="button" data-key="k">k</button>
+            <button class="keyboard-key" type="button" data-key="l">l</button>
+          </div>
+          <div class="keyboard-row keyboard-row-bottom">
+            <button class="keyboard-key" type="button" data-key="z">z</button>
+            <button class="keyboard-key" type="button" data-key="x">x</button>
+            <button class="keyboard-key" type="button" data-key="c">c</button>
+            <button class="keyboard-key" type="button" data-key="v">v</button>
+            <button class="keyboard-key" type="button" data-key="b">b</button>
+            <button class="keyboard-key" type="button" data-key="n">n</button>
+            <button class="keyboard-key" type="button" data-key="m">m</button>
+            <button class="keyboard-key keyboard-key-cancel" type="button" data-key=" " aria-label="取消锁定" title="空格取消锁定">空格 / 取消</button>
+          </div>
+        </div>
+        <textarea id="hanziInput" class="hanzi-ime-input" rows="1" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="中文模式输入区" hidden></textarea>
+
+      </section>
+      <footer class="site-footer"><span id="appVersion">ZYESE / v0.10.4</span><span>默认配置</span></footer>
+    </main>
+    <dialog id="inviteAuthDialog" class="invite-auth-dialog">
+      <form id="inviteAuthForm" method="dialog" novalidate>
+        <div class="invite-auth-heading"><div><span class="eyebrow">ZYESE ACCOUNT</span><h2 id="inviteAuthTitle">青春版账号</h2></div><button id="inviteAuthClose" type="button" aria-label="关闭">×</button></div>
+        <div class="invite-auth-tabs" role="tablist" aria-label="青春版账号操作"><button id="inviteAuthLoginTab" type="button" role="tab">登录</button><button id="inviteAuthRegisterTab" type="button" role="tab">邀请码注册</button></div>
+        <p id="inviteAuthHint">每个邀请码只能注册一个账号。</p>
+        <label><span>用户名</span><input id="inviteUsername" name="username" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]+" autocomplete="username" placeholder="3–24位字母、数字或下划线" required /><small id="inviteUsernameError"></small></label>
+        <label id="invitePasswordGroup"><span>密码</span><div class="password-field"><input id="invitePassword" name="password" type="password" minlength="8" maxlength="72" autocomplete="new-password" placeholder="至少8个字符" required /><button id="invitePasswordToggle" type="button" aria-label="显示密码">显示</button></div><small id="invitePasswordError"></small></label>
+        <label id="inviteCodeGroup"><span>邀请码</span><input id="inviteCode" name="inviteCode" maxlength="18" autocomplete="off" placeholder="ZYS-XXXX-XXXX-XXXX" /><small id="inviteCodeError"></small></label>
+        <p id="inviteAuthStatus" class="invite-auth-status" aria-live="polite"></p>
+        <button id="inviteAuthSubmit" class="primary-button" type="submit">注册并登录</button>
+      </form>
+    </dialog>
+    <dialog id="inputModeDialog" class="input-mode-dialog">
+      <div>
+        <div class="input-mode-heading"><div><span class="eyebrow">SELECT MODE</span><h2>选择游戏模式</h2></div><button id="inputModeClose" type="button" aria-label="关闭模式选择">×</button></div>
+        <p>选择本次要进入的游戏模式，确认后立即进入战场。</p>
+        <div class="input-mode-section regular-mode-section"><span class="input-mode-section-title">常规模式</span><div class="input-mode-options" role="group" aria-label="常规游戏模式">
+          <button type="button" data-input-mode="en"><span>EN</span><strong>英文单人</strong><small>输入英文单词，保留中文学习释义</small></button>
+          <button type="button" data-input-mode="zh"><span>中</span><strong>中文单人</strong><small>输入词语和成语，支持系统输入法与智能联想</small></button>
+          <button id="arenaButton" class="arena-mode-option" type="button" disabled><span>S1</span><strong>竞技对战</strong><small>三分钟实时对战，与对手挑战相同的英文敌机序列</small></button>
+          <button id="customModeButton" class="custom-mode-option" type="button"><span>LAB</span><strong>自定义游戏</strong><small>导入本地词库，自选单人或双人房间，不计入排行榜</small></button>
+        </div></div>
+        <section class="input-mode-section hell-mode-section" aria-labelledby="hellModeTitle"><div class="hell-mode-heading"><span class="input-mode-section-title" id="hellModeTitle">地狱模式 · 15 关</span><span class="hell-warning">高难度 · 每个模式每日 10 次</span></div><div class="input-mode-options" role="group" aria-label="地狱游戏模式">
+          <button class="hell-mode-option locked" type="button" data-input-mode="hell-en" data-unlocked="false" aria-disabled="true"><span>HELL<br>EN</span><strong>地狱英文</strong><small>大学学术词库 · 锁定后整词模糊，考验瞬时记忆<i class="hell-lock-state" data-hell-unlock="hell-en">已封印 · 普通英文完成 10 关解锁</i><b data-hell-attempts="hell-en">今日已挑战 0/10 · 剩余 10 次</b></small></button>
+          <button class="hell-mode-option locked" type="button" data-input-mode="hell-zh" data-unlocked="false" aria-disabled="true"><span>HELL<br>中</span><strong>地狱无门</strong><small>繁体生僻字与叠字组合 · 带声调拼音 · 按画面字形输入<i class="hell-input-tip">建议使用U模式拆字输入或者五笔输入法，纯拼音和嘴遁选手建议不要为难自己</i><i class="hell-lock-state" data-hell-unlock="hell-zh">已封印 · 普通中文完成 10 关解锁</i><b data-hell-attempts="hell-zh">今日已挑战 0/10 · 剩余 10 次</b></small></button>
+        </div><p class="input-mode-footnote">先在对应普通模式完整通过 10 关（累计至少 80 击毁）才能解除封印。地狱模式每击毁 8 个目标升一关；完成第 15 关的第 8 个击毁（累计 120 个）后由服务器判定通关，不会生成第 16 关。挑战次数按玩家和模式分别计算，北京时间每日 00:00 重置。</p></section>
+        <p id="inputModeStatus" class="input-mode-status" aria-live="polite"></p>
+      </div>
+    </dialog>
+    <dialog id="gameGuideDialog" class="game-guide-dialog">
+      <div>
+        <div class="game-guide-heading"><div><span class="eyebrow">FLIGHT MANUAL</span><h2>游戏说明</h2></div><button id="gameGuideTopClose" type="button" aria-label="关闭游戏说明">×</button></div>
+        <div class="game-guide-grid">
+          <section><span>01</span><div><h3>基本操作</h3><p>英文模式输入敌机单词；中文模式使用系统中文输入法输入词语或成语，支持智能联想和多字上屏。每个正确字符发射一颗子弹，空格取消锁定，Esc 暂停。</p></div></section>
+          <section><span>02</span><div><h3>锁定机制</h3><p>输入第一个字符后，会优先锁定同首字符中最接近玩家的敌机。锁定会持续到击毁、输错重置或主动按空格取消。</p></div></section>
+          <section><span>03</span><div><h3>难度提升</h3><p>每击毁8架敌机进入下一波，敌机持续加速且生成更频繁。第3波开始出现精英敌机；第6波起输错会清空当前单词；第11波起精英与Boss单词会间歇隐藏，Boss还会发射带单词的光球。</p></div></section>
+          <section><span>04</span><div><h3>地狱模式</h3><p>普通英文完整通过10关解锁地狱英文，普通中文完整通过10关解锁地狱无门。两个地狱模式各进行15关、累计120击毁通关。地狱英文使用大学学术词库，锁定后未击打字母模糊，已击打字母正常回显，空格取消锁定后恢复；Boss词组自动跳过空格。地狱无门使用繁体、生僻字和叠字组合，按画面字形输入，始终显示带声调拼音。建议使用U模式拆字输入或者五笔输入法，纯拼音和嘴遁选手建议不要为难自己。每个地狱模式每天最多挑战10次，各自拥有独立今日榜和总榜。</p></div></section>
+          <section><span>05</span><div><h3>ALLAN 护盾</h3><p>第5波前击毁彩蛋目标 ALLAN 可获得1次护盾。护盾会在发生机体碰撞时自动触发，清除下半屏全部非Boss敌机，Boss不会被清除。</p></div></section>
+        </div>
+        <label class="game-guide-dismiss"><input id="gameGuideDontShow" type="checkbox" /> <span>此账号登录时不再提示</span></label>
+        <button id="gameGuideClose" class="primary-button" type="button">我知道了</button>
+      </div>
+    </dialog>
+    <dialog id="gameSettingsDialog" class="game-settings-dialog">
+      <div>
+        <div class="game-settings-heading"><div><span class="eyebrow">SETTINGS</span><h2>游戏设置</h2></div><button id="gameSettingsClose" type="button" aria-label="关闭游戏设置">×</button></div>
+        <label class="game-settings-toggle"><input id="wordTranslationsToggle" type="checkbox" /><span><strong>显示单词中文释义</strong><small>在敌机英文单词下方显示一行小字中文释义，只影响本机显示，单人与竞技同时生效</small></span></label>
+        <div class="game-settings-field game-settings-ime-block">
+          <label class="game-settings-select" for="chineseImePositionSelect">
+            <span><strong>中文输入法候选框位置</strong><small>调整中文模式下系统输入法候选词浮窗的弹出位置</small></span>
+            <select id="chineseImePositionSelect">
+              <option value="bottom">屏幕底部（默认）</option>
+              <option value="player-center">战机上方 / 居中偏下</option>
+              <option value="custom">自定义位置（点击下方模拟画面选取）</option>
+            </select>
+          </label>
+          <div id="imePositionPicker" class="ime-position-picker">
+            <div class="ime-picker-header">
+              <span>模拟游戏视口定位器</span>
+              <small id="imePositionCoords">X: 50% · Y: 72%</small>
+            </div>
+            <div id="imePickerStage" class="ime-picker-stage" tabindex="0" role="region" aria-label="点击或拖动设定候选框位置">
+              <div class="ime-picker-grid"></div>
+              <div class="ime-picker-enemy">
+                <span class="ime-picker-enemy-ship"></span>
+                <span class="ime-picker-enemy-word">探索</span>
+              </div>
+              <div class="ime-picker-player">
+                <span class="ime-picker-player-ship"></span>
+              </div>
+              <div id="imePickerPin" class="ime-picker-pin">
+                <div class="ime-picker-crosshair"></div>
+                <div class="ime-picker-bubble">
+                  <span class="ime-bubble-query">tan</span>
+                  <span class="ime-bubble-list"><b>1.</b>探索 <b>2.</b>叹</span>
+                </div>
+              </div>
+            </div>
+            <div class="ime-picker-footer">
+              <small>在上方画面中点击或拖动标靶，设定输入法出现坐标</small>
+              <button id="imePickerReset" type="button" class="ime-picker-reset-btn">重置位置</button>
+            </div>
+          </div>
+        </div>
+        <label class="game-settings-range" for="keyboardHeight">
+          <span><strong>虚拟键盘高度</strong><output id="keyboardHeightValue" for="keyboardHeight">42px</output></span>
+          <small>调整手机虚拟键盘按键高度，设置会自动保存。</small>
+          <input id="keyboardHeight" type="range" min="34" max="54" step="2" value="42" aria-label="虚拟键盘高度" />
+        </label>
+        <button id="gameSettingsDone" class="primary-button" type="button">完成</button>
+      </div>
+    </dialog>
+    <dialog id="customModeDialog" class="custom-mode-dialog">
+      <form id="customModeForm" method="dialog">
+        <div class="custom-mode-heading"><div><span class="eyebrow">LOCAL FLIGHT LAB</span><h2>自定义游戏</h2></div><button id="customModeClose" type="button" aria-label="关闭自定义游戏">×</button></div>
+        <p class="custom-mode-note">自定义模式完全本地运行，不上传成绩、不计入排行榜，也不需要网络。</p>
+        <label class="custom-mode-field"><span>词库</span><textarea id="customWordInput" rows="8" placeholder="每行一个单词，也支持逗号或空格分隔"></textarea></label>
+        <label class="custom-mode-field"><span>导入词库文件</span><input id="customWordFile" type="file" accept=".txt,.csv,text/plain,text/csv" /><small>只读取本机文件，建议每行一个单词。</small></label>
+        <label class="custom-mode-field"><span>房间类型</span><select id="customRoomType"><option value="single">单人自定义房间</option><option value="double">双人自定义房间（本地练习）</option></select></label>
+        <p id="customModeStatus" class="custom-mode-status" aria-live="polite"></p>
+        <button id="customModeStart" class="primary-button" type="submit">开始自定义游戏</button>
+      </form>
+    </dialog>
+    <dialog id="skinSettingsDialog" class="skin-settings-dialog">
+      <div>
+        <div class="skin-settings-heading"><div><span class="eyebrow">HANGAR</span><h2>皮肤设置</h2></div><button id="skinSettingsClose" type="button" aria-label="关闭皮肤设置">×</button></div>
+        <div id="skinPreview" class="skin-preview-stage" data-theme="blue">
+          <div class="skin-preview-orbit skin-preview-orbit-a"></div><div class="skin-preview-orbit skin-preview-orbit-b"></div>
+          <div class="skin-preview-petals" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <canvas id="projectilePreviewCanvas" class="projectile-preview-canvas" aria-hidden="true"></canvas>
+          <img id="skinPreviewImage" src="/assets/ships/player-a-silver-blue-256.webp" alt="默认战机预览" />
+          <span id="skinPreviewLock" class="skin-preview-lock" hidden>仅后台发放</span>
+        </div>
+        <div class="skin-preview-copy"><div><span id="skinPreviewRarity">标准</span><h3 id="skinPreviewName">默认战机</h3></div><p id="skinPreviewDescription">银白与钴蓝涂装的标准战机。</p></div>
+        <div id="skinOptionList" class="skin-option-list" role="listbox" aria-label="可预览皮肤"></div>
+        <p id="skinSettingsStatus" class="skin-settings-status" aria-live="polite"></p>
+        <button id="skinEquipButton" class="primary-button" type="button">正在读取权限</button>
+        <div class="loadout-divider"><span>子弹特效</span><small>与战机皮肤独立</small></div>
+        <div id="projectileOptionList" class="projectile-option-list" role="listbox" aria-label="可预览子弹特效"></div>
+        <p id="projectileSettingsStatus" class="skin-settings-status" aria-live="polite"></p>
+        <button id="projectileEquipButton" class="secondary-button" type="button">装备子弹特效</button>
+      </div>
+    </dialog>
+    <dialog id="mobileArenaDialog" class="mobile-arena-dialog">
+      <div><span class="eyebrow">S1 竞技测试</span><h2>手机版暂不支持竞技对战</h2><p>竞技模式需要同时显示双方战场，请使用电脑浏览器进入。</p><button id="mobileArenaClose" class="primary-button" type="button">我知道了</button></div>
+    </dialog>
+    <dialog id="updateAnnouncementDialog" class="update-announcement-dialog">
+      <div>
+        <div class="update-announcement-heading"><div><span class="eyebrow">UPDATE · v0.10.4</span><h2>排行榜签名修改增加冷却限流保护</h2></div><button id="updateAnnouncementClose" type="button" aria-label="关闭更新公告">×</button></div>
+        <p class="update-announcement-date">2026年8月28日</p>
+        <p class="test-server-notice" role="alert">您正在访问一个测试服务器，可能有很多服务器BUG，数据不与原服务器互通，且存在随时删档的可能。</p>
+        <ul class="update-announcement-list">
+          <li>单人排行榜前十名签名修改引入 3 秒操作冷却时间（Rate Limiting），配合服务器与 D1 双重频控，防止高频脚本滥用与写入拥堵。</li>
+          <li>短时间内频繁修改将提示等待倒计时并临时禁用提交按钮，提升系统稳定性。</li>
+        </ul>
+        <button id="updateHistoryToggle" class="update-history-toggle" type="button" aria-expanded="false">查看历史更新</button>
+        <section id="updateHistory" class="update-history" hidden aria-label="历史更新记录">
+           <article class="update-history-item"><div><strong>v0.10.4</strong><time datetime="2026-08-28">2026年8月28日</time></div><p>排行榜签名修改增加 3 秒操作冷却与双重限流保护，防止高频写入滥用。</p></article>
+           <article class="update-history-item"><div><strong>v0.10.3</strong><time datetime="2026-08-28">2026年8月28日</time></div><p>单人模式前十名上榜签名支持随时重新设置、修改或清空，新增在榜专属横幅与我的签名一览。</p></article>
+           <article class="update-history-item"><div><strong>v0.10.2</strong><time datetime="2026-08-28">2026年8月28日</time></div><p>优化地狱英文回显：已击打字母正常显示，未击打部分保持遮蔽，方便掌握输入进度。</p></article>
+           <article class="update-history-item"><div><strong>v0.10.1</strong><time datetime="2026-08-27">2026年8月27日</time></div><p>修复在线单人与竞技敌机每半秒快慢交替的移动顿挫，保留服务器权威判定及原有玩法。</p></article>
+           <article class="update-history-item"><div><strong>v0.10.0</strong><time datetime="2026-08-27">2026年8月27日</time></div><p>更新了一个关于我的彩蛋，第一个发现的人请截图给我，奖励小礼物一个。</p></article>
+           <article class="update-history-item"><div><strong>v0.9.0</strong><time datetime="2026-08-26">2026年8月26日</time></div><p>地狱英文改用大学学术词库，锁定后整词缓存模糊；地狱无门扩充繁体、生僻字与叠字词库，增加静态拼音和离线字形保障。</p></article>
+           <article class="update-history-item"><div><strong>v0.8.0</strong><time datetime="2026-08-27">2026年8月27日</time></div><p>今日/总榜签名按模式和榜单独立；后台公开九榜、对局中心与用户完整生涯页面重构。</p></article>
+           <article class="update-history-item"><div><strong>v0.7.2</strong><time datetime="2026-08-26">2026年8月26日</time></div><p>对应普通模式完整通过10关后才能解除地狱模式封印，前端显示进度并由服务器权威校验建局。</p></article>
+           <article class="update-history-item"><div><strong>v0.7.1</strong><time datetime="2026-08-26">2026年8月26日</time></div><p>地狱无门入口和游戏说明增加U模式拆字、五笔输入法与纯拼音难度提示。</p></article>
+           <article class="update-history-item"><div><strong>v0.7.0</strong><time datetime="2026-08-26">2026年8月26日</time></div><p>新增地狱英文与地狱无门十五关挑战、记忆遮挡、生僻字拼音、深红战场和独立排行榜；每个地狱模式每日限10次。</p></article>
+           <article class="update-history-item"><div><strong>v0.6.3</strong><time datetime="2026-08-27">2026年8月27日</time></div><p>修复高波次重叠单词模糊与热路径分配导致的严重掉帧。</p></article>
+          <article class="update-history-item"><div><strong>v0.6.2</strong><time datetime="2026-08-26">2026年8月26日</time></div><p>精简玩家排行榜，保留英文/中文今日与总榜、竞技及个人记录。</p></article>
+          <article class="update-history-item"><div><strong>v0.6.1</strong><time datetime="2026-08-26">2026年8月26日</time></div><p>将英文单人、中文单人和竞技 S1 统一移入开始后的模式选择弹窗。</p></article>
+          <article class="update-history-item"><div><strong>v0.6.0</strong><time datetime="2026-08-26">2026年8月26日</time></div><p>新增服务器权威的中文词语、成语输入模式和独立中文排行榜。</p></article>
+          <article class="update-history-item"><div><strong>v0.5.3</strong><time datetime="2026-08-26">2026年8月26日</time></div><p>加入个人记录、本地自定义练习、评分结算和版本化更新公告。</p></article>
+          <article class="update-history-item"><div><strong>v0.5.2</strong><time datetime="2026-08-25">2026年8月25日</time></div><p>独立子弹特效、魔法少女号、魔法弹，以及优化后的结算和单词显示。</p></article>
+          <article class="update-history-item"><div><strong>v0.5.1</strong><time datetime="2026-08-24">2026年8月24日</time></div><p>修复青春版邀请码注册与登录的 Cloudflare 1101 问题。</p></article>
+          <article class="update-history-item"><div><strong>v0.5.0</strong><time datetime="2026-08-23">2026年8月23日</time></div><p>加入服务器权威的战机皮肤系统与魔法少女号预览。</p></article>
+        </section>
+        <button id="updateAnnouncementConfirm" class="primary-button" type="button">知道了</button>
+      </div>
+    </dialog>
+  </body>
+</html>

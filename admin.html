@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07101d" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Zyese 管理后台</title>
+    <script type="module" crossorigin src="/assets/admin-BWLdtBZP.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+    <link rel="stylesheet" crossorigin href="/assets/admin-DtTXxY9B.css">
+  </head>
+  <body>
+    <div id="adminGate" class="admin-gate">
+      <div><span>ZYESE CONTROL</span><h1>管理后台</h1><p id="gateMessage">正在验证管理员身份</p><a id="gateLogin" href="/api/auth/linuxdo/start?return_to=admin" hidden>使用 Linux.do 登录</a></div>
+    </div>
+    <div id="adminApp" class="admin-shell" hidden>
+      <aside class="admin-sidebar">
+        <div class="admin-brand"><span>ZYESE</span><strong id="adminVersion">CONTROL · v0.8.0</strong></div>
+        <nav id="adminNav" aria-label="后台导航">
+          <div class="nav-group"><span>工作台</span><button class="active" data-view="overview">总览</button><button data-view="attention">待处理</button></div>
+          <div class="nav-group"><span>玩家</span><button data-view="users">用户中心</button><button data-view="invites">邀请码</button><button data-view="bans">封禁与权限</button></div>
+          <div class="nav-group"><span>游戏运营</span><button data-view="runs">对局中心</button><button data-view="leaderboards">公开榜单</button><button data-view="pvp">竞技对局</button></div>
+          <div class="nav-group"><span>系统</span><button data-view="audit">审计日志</button></div>
+        </nav>
+        <a class="back-link" href="https://zyese.xyz">返回游戏</a>
+      </aside>
+      <section class="admin-workspace">
+        <header class="admin-topbar">
+          <div><span class="eyebrow">ZYESE ADMIN</span><h1 id="viewTitle">总览</h1></div>
+          <label class="admin-global-search"><span class="sr-only">全局搜索</span><input id="adminGlobalSearch" type="search" placeholder="搜索玩家或对局 ID" autocomplete="off" /><button id="adminGlobalSearchButton" type="button">搜索</button></label>
+          <button id="adminRefreshButton" class="admin-refresh-button" type="button">刷新</button>
+          <div class="admin-identity"><img id="adminAvatar" alt="" /><div><strong id="adminUsername"></strong><span id="adminLinuxdoId"></span></div></div>
+        </header>
+        <div id="adminToolbar" class="admin-toolbar"></div>
+        <main id="adminContent" class="admin-content" aria-live="polite"></main>
+      </section>
+    </div>
+    <dialog id="detailDialog" class="detail-dialog"><div id="detailContent"></div><button id="detailClose" class="dialog-close" type="button">关闭</button></dialog>
+    <div id="adminToast" class="admin-toast" hidden></div>
+  </body>
+</html>
