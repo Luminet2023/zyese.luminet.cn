@@ -20,10 +20,10 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-ByaBa1tX.js"></script>
+    <script type="module" crossorigin src="/assets/game-CWSkjIcp.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
-    <link rel="modulepreload" crossorigin href="/assets/snapshot-smoothing-Cjk6YOKB.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-WTtRMVn8.css">
+    <link rel="modulepreload" crossorigin href="/assets/skins-CzNyHn-X.js">
+    <link rel="stylesheet" crossorigin href="/assets/game-R_NwXNFs.css">
   </head>
   <body>
     <main class="app-shell">
@@ -93,6 +93,7 @@
                 <option value="zh">中文单人</option>
                 <option value="hell-en">地狱英文</option>
                 <option value="hell-zh">地狱无门</option>
+                <option value="beta-ldc-battle">LDC排位赛</option>
               </select>
               <span>个人最高分</span> <strong id="bestScore">000000</strong>
             </div>
@@ -157,6 +158,7 @@
                 <section class="leaderboard-group"><span>常规</span><div><button class="tab-button active" type="button" data-board="daily" role="tab" aria-selected="true">英文今日</button><button class="tab-button" type="button" data-board="all-time" role="tab" aria-selected="false">英文总榜</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-daily" role="tab" aria-selected="false">中文今日</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-all-time" role="tab" aria-selected="false">中文总榜</button></div></section>
                 <section class="leaderboard-group leaderboard-hell-group"><span>地狱</span><div><button class="tab-button hell-tab-button" type="button" data-board="hell-en-daily" role="tab" aria-selected="false">地狱英文今日</button><button class="tab-button hell-tab-button" type="button" data-board="hell-en-all-time" role="tab" aria-selected="false">地狱英文总榜</button><button class="tab-button hell-tab-button" type="button" data-board="hell-zh-daily" role="tab" aria-selected="false">地狱无门今日</button><button class="tab-button hell-tab-button" type="button" data-board="hell-zh-all-time" role="tab" aria-selected="false">地狱无门总榜</button></div></section>
                 <section class="leaderboard-group leaderboard-arena-group"><span>竞技</span><div><button class="tab-button arena-tab-button" type="button" data-board="arena" role="tab" aria-selected="false">竞技 S1</button></div></section>
+                <section class="leaderboard-group leaderboard-ldc-group" data-beta-board hidden><span>BETA</span><div><button class="tab-button ldc-tab-button" type="button" data-board="ldc-daily" role="tab" aria-selected="false">LDC 今日</button><button class="tab-button ldc-tab-button" type="button" data-board="ldc-all-time" role="tab" aria-selected="false">LDC 总榜</button></div></section>
               </div>
               <div id="leaderboardSelfSignatureBar" class="leaderboard-self-bar" hidden>
                 <div class="leaderboard-self-summary">
@@ -187,11 +189,8 @@
               <div id="personalStats" class="personal-stats" hidden></div>
               <div id="mySignaturesView" class="my-signatures-view" hidden>
                 <div class="my-signatures-heading">
-                  <div>
-                    <h3>我的上榜签名</h3>
-                    <p>单人模式今日榜与总榜排名前十可设置个性签名，最多 32 字符。</p>
-                  </div>
-                  <button id="mySignaturesBackBtn" class="secondary-button" type="button">返回排行榜</button>
+                  <p class="my-signatures-desc">单人模式今日榜与总榜排名前十可设置个性签名，最多 32 字符。</p>
+                  <button id="mySignaturesBackBtn" class="secondary-button" type="button" hidden>返回排行榜</button>
                 </div>
                 <div id="mySignaturesList" class="my-signatures-list"></div>
                 <div id="mySignaturesEmpty" class="my-signatures-empty" hidden>暂无在榜前十记录，快去挑战榜单吧！</div>
@@ -246,7 +245,7 @@
         <textarea id="hanziInput" class="hanzi-ime-input" rows="1" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="中文模式输入区" hidden></textarea>
 
       </section>
-      <footer class="site-footer"><span id="appVersion">ZYESE / v0.11.2</span><span>默认配置</span></footer>
+      <footer class="site-footer"><span id="appVersion">ZYESE / v0.12.1</span><span>默认配置</span></footer>
     </main>
     <dialog id="inviteAuthDialog" class="invite-auth-dialog">
       <form id="inviteAuthForm" method="dialog" novalidate>
@@ -269,6 +268,7 @@
           <button type="button" data-input-mode="zh"><span>中</span><strong>中文单人</strong><small>输入词语和成语，支持系统输入法与智能联想</small></button>
           <button id="arenaButton" class="arena-mode-option" type="button" disabled><span>S1</span><strong>竞技对战</strong><small>三分钟实时对战，与对手挑战相同的英文敌机序列</small></button>
           <button id="customModeButton" class="custom-mode-option" type="button"><span>LAB</span><strong>自定义游戏</strong><small>导入本地词库，自选单人或双人房间，不计入排行榜</small></button>
+          <button id="ldcBattleButton" class="ldc-mode-option" type="button" data-input-mode="beta-ldc-battle" hidden><span>BETA</span><strong>LDC排位赛</strong><small>50 LDC 门票 · 英文排位 · 每账号仅限一张</small></button>
         </div></div>
         <section class="input-mode-section hell-mode-section" aria-labelledby="hellModeTitle"><div class="hell-mode-heading"><span class="input-mode-section-title" id="hellModeTitle">地狱模式 · 15 关</span><span class="hell-warning">高难度 · 每个模式每日 10 次</span></div><div class="input-mode-options" role="group" aria-label="地狱游戏模式">
           <button class="hell-mode-option locked" type="button" data-input-mode="hell-en" data-unlocked="false" aria-disabled="true"><span>HELL<br>EN</span><strong>地狱英文</strong><small>大学学术词库 · 锁定后整词模糊，考验瞬时记忆<i class="hell-lock-state" data-hell-unlock="hell-en">已封印 · 普通英文完成 10 关解锁</i><b data-hell-attempts="hell-en">今日已挑战 0/10 · 剩余 10 次</b></small></button>
@@ -376,15 +376,15 @@
     </dialog>
     <dialog id="updateAnnouncementDialog" class="update-announcement-dialog">
       <div>
-        <div class="update-announcement-heading"><div><span class="eyebrow">UPDATE · v0.10.4</span><h2>排行榜签名修改增加冷却限流保护</h2></div><button id="updateAnnouncementClose" type="button" aria-label="关闭更新公告">×</button></div>
-        <p class="update-announcement-date">2026年8月28日</p>
-        <p class="test-server-notice" role="alert">您正在访问一个测试服务器，可能有很多服务器BUG，数据不与原服务器互通，且存在随时删档的可能。</p>
+        <div class="update-announcement-heading"><div><span class="eyebrow">UPDATE · v0.12.1</span><h2>战斗节奏与高波次刷怪机制平衡优化</h2></div><button id="updateAnnouncementClose" type="button" aria-label="关闭更新公告">×</button></div>
+        <p class="update-announcement-date">2026年8月29日</p>
         <ul class="update-announcement-list">
-          <li>单人排行榜前十名签名修改引入 3 秒操作冷却时间（Rate Limiting），配合服务器与 D1 双重频控，防止高频脚本滥用与写入拥堵。</li>
-          <li>短时间内频繁修改将提示等待倒计时并临时禁用提交按钮，提升系统稳定性。</li>
+          <li><strong>刷怪系数与速度平滑</strong>：为适配新一代高频响应后端并解决多 Boss 堆叠问题，优化了高波次怪物移速成长斜率与刷怪冷却下限，并将同屏 Boss 数量严格限制为最多 1 只。</li>
+          <li><strong>体验与手感反馈</strong>：本次调整旨在使游戏节奏和容错窗口完全对齐设计原版体验。如果您在对局中感觉手感或难度与原版存在差异，请知会管理人员协助调整。</li>
         </ul>
         <button id="updateHistoryToggle" class="update-history-toggle" type="button" aria-expanded="false">查看历史更新</button>
         <section id="updateHistory" class="update-history" hidden aria-label="历史更新记录">
+           <article class="update-history-item"><div><strong>v0.12.1</strong><time datetime="2026-08-29">2026年8月29日</time></div><p>优化高波次刷怪系数与怪物移速成长曲线，同屏 Boss 数量限制为 1 只以贴近原版手感。</p></article>
            <article class="update-history-item"><div><strong>v0.10.4</strong><time datetime="2026-08-28">2026年8月28日</time></div><p>排行榜签名修改增加 3 秒操作冷却与双重限流保护，防止高频写入滥用。</p></article>
            <article class="update-history-item"><div><strong>v0.10.3</strong><time datetime="2026-08-28">2026年8月28日</time></div><p>单人模式前十名上榜签名支持随时重新设置、修改或清空，新增在榜专属横幅与我的签名一览。</p></article>
            <article class="update-history-item"><div><strong>v0.10.2</strong><time datetime="2026-08-28">2026年8月28日</time></div><p>优化地狱英文回显：已击打字母正常显示，未击打部分保持遮蔽，方便掌握输入进度。</p></article>
