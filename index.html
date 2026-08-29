@@ -20,10 +20,10 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-_idCbjA6.js"></script>
+    <script type="module" crossorigin src="/assets/game-B-q8cgQQ.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
     <link rel="modulepreload" crossorigin href="/assets/skins-CzNyHn-X.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-R_NwXNFs.css">
+    <link rel="stylesheet" crossorigin href="/assets/game-BlN-dLod.css">
   </head>
   <body>
     <main class="app-shell">
@@ -158,7 +158,7 @@
                 <section class="leaderboard-group"><span>常规</span><div><button class="tab-button active" type="button" data-board="daily" role="tab" aria-selected="true">英文今日</button><button class="tab-button" type="button" data-board="all-time" role="tab" aria-selected="false">英文总榜</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-daily" role="tab" aria-selected="false">中文今日</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-all-time" role="tab" aria-selected="false">中文总榜</button></div></section>
                 <section class="leaderboard-group leaderboard-hell-group"><span>地狱</span><div><button class="tab-button hell-tab-button" type="button" data-board="hell-en-daily" role="tab" aria-selected="false">地狱英文今日</button><button class="tab-button hell-tab-button" type="button" data-board="hell-en-all-time" role="tab" aria-selected="false">地狱英文总榜</button><button class="tab-button hell-tab-button" type="button" data-board="hell-zh-daily" role="tab" aria-selected="false">地狱无门今日</button><button class="tab-button hell-tab-button" type="button" data-board="hell-zh-all-time" role="tab" aria-selected="false">地狱无门总榜</button></div></section>
                 <section class="leaderboard-group leaderboard-arena-group"><span>竞技</span><div><button class="tab-button arena-tab-button" type="button" data-board="arena" role="tab" aria-selected="false">竞技 S1</button></div></section>
-                <section class="leaderboard-group leaderboard-ldc-group" data-beta-board hidden><span>BETA</span><div><button class="tab-button ldc-tab-button" type="button" data-board="ldc-daily" role="tab" aria-selected="false">LDC 今日</button><button class="tab-button ldc-tab-button" type="button" data-board="ldc-all-time" role="tab" aria-selected="false">LDC 总榜</button></div></section>
+                <section class="leaderboard-group leaderboard-ldc-group" data-beta-board hidden><span>BETA</span><div><button class="tab-button ldc-tab-button" type="button" data-board="ldc-daily" role="tab" aria-selected="false">LDC 日榜</button></div></section>
               </div>
               <div id="leaderboardSelfSignatureBar" class="leaderboard-self-bar" hidden>
                 <div class="leaderboard-self-summary">
@@ -185,6 +185,7 @@
                 </form>
               </div>
               <div id="leaderboardState" class="leaderboard-state">正在读取排行榜</div>
+              <div id="ldcPayoutNotice" class="ldc-payout-notice" hidden><span>我的明日预计奖励</span><strong id="ldcPayoutAmount">0.00 LDC</strong><small id="ldcPayoutRank"></small></div>
               <ol id="leaderboardList" class="leaderboard-list"></ol>
               <div id="personalStats" class="personal-stats" hidden></div>
               <div id="mySignaturesView" class="my-signatures-view" hidden>
