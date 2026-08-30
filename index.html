@@ -20,9 +20,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-DFx_sLGg.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-BxUwJyoK.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-k7M036Ob.css">
+    <script type="module" crossorigin src="/assets/game-CdcYMmfy.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-BeMtDy2s.js">
+    <link rel="stylesheet" crossorigin href="/assets/game-C09ENKoL.css">
   </head>
   <body>
     <main class="app-shell">
@@ -90,6 +90,7 @@
               <select id="bestScoreModeSelect" class="best-score-mode-select" aria-label="选择个人最高分模式">
                 <option value="en">英文单人</option>
                 <option value="zh">中文单人</option>
+                <option value="ja">日语单人</option>
                 <option value="hell-en">地狱英文</option>
                 <option value="hell-zh">地狱无门</option>
                 <option value="beta-ldc-battle">LDC排位赛</option>
@@ -154,10 +155,10 @@
                 </div>
               </div>
               <div id="leaderboardTabs" class="leaderboard-tabs" role="tablist" aria-label="排行榜类型">
-                <section class="leaderboard-group"><span>常规</span><div><button class="tab-button active" type="button" data-board="daily" role="tab" aria-selected="true">英文今日</button><button class="tab-button" type="button" data-board="all-time" role="tab" aria-selected="false">英文总榜</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-daily" role="tab" aria-selected="false">中文今日</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-all-time" role="tab" aria-selected="false">中文总榜</button></div></section>
+                <section class="leaderboard-group"><span>常规</span><div><button class="tab-button active" type="button" data-board="daily" role="tab" aria-selected="true">英文今日</button><button class="tab-button" type="button" data-board="all-time" role="tab" aria-selected="false">英文总榜</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-daily" role="tab" aria-selected="false">中文今日</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-all-time" role="tab" aria-selected="false">中文总榜</button><button class="tab-button japanese-tab-button" type="button" data-board="ja-daily" role="tab" aria-selected="false">日语今日</button><button class="tab-button japanese-tab-button" type="button" data-board="ja-all-time" role="tab" aria-selected="false">日语总榜</button></div></section>
                 <section class="leaderboard-group leaderboard-hell-group"><span>地狱</span><div><button class="tab-button hell-tab-button" type="button" data-board="hell-en-daily" role="tab" aria-selected="false">地狱英文今日</button><button class="tab-button hell-tab-button" type="button" data-board="hell-en-all-time" role="tab" aria-selected="false">地狱英文总榜</button><button class="tab-button hell-tab-button" type="button" data-board="hell-zh-daily" role="tab" aria-selected="false">地狱无门今日</button><button class="tab-button hell-tab-button" type="button" data-board="hell-zh-all-time" role="tab" aria-selected="false">地狱无门总榜</button></div></section>
                 <section class="leaderboard-group leaderboard-arena-group"><span>竞技</span><div><button class="tab-button arena-tab-button" type="button" data-board="arena" role="tab" aria-selected="false">竞技 S1</button></div></section>
-                <section class="leaderboard-group leaderboard-ldc-group" data-beta-board hidden><span>BETA</span><div><button class="tab-button ldc-tab-button" type="button" data-board="ldc-daily" role="tab" aria-selected="false">LDC 日榜</button></div></section>
+                <section class="leaderboard-group leaderboard-ldc-group" data-beta-board data-required-flag="beta-ldc-battle" hidden><span>BETA</span><div><button class="tab-button ldc-tab-button" type="button" data-board="ldc-daily" role="tab" aria-selected="false">LDC 日榜</button></div></section>
               </div>
               <div id="leaderboardSelfSignatureBar" class="leaderboard-self-bar" hidden>
                 <div class="leaderboard-self-summary">
@@ -266,14 +267,15 @@
         <div class="input-mode-section regular-mode-section"><span class="input-mode-section-title">常规模式</span><div class="input-mode-options" role="group" aria-label="常规游戏模式">
           <button type="button" data-input-mode="en"><span>EN</span><strong>英文单人</strong><small>输入英文单词，保留中文学习释义</small></button>
           <button type="button" data-input-mode="zh"><span>中</span><strong>中文单人</strong><small>输入词语和成语，支持系统输入法与智能联想</small></button>
+          <button type="button" data-input-mode="ja"><span>日</span><strong>日语单人</strong><small>罗马字打字（寿司打方式），支持平假名/片假名及多种拼写分支</small></button>
           <button id="arenaButton" class="arena-mode-option" type="button" disabled><span>S1</span><strong>竞技对战</strong><small>三分钟实时对战，与对手挑战相同的英文敌机序列</small></button>
           <button id="customModeButton" class="custom-mode-option" type="button"><span>LAB</span><strong>自定义游戏</strong><small>导入本地词库，自选单人或双人房间，不计入排行榜</small></button>
-          <button id="ldcBattleButton" class="ldc-mode-option" type="button" data-input-mode="beta-ldc-battle" hidden><span>BETA</span><strong>LDC排位赛</strong><small>50 LDC 门票 · 英文排位 · 每账号仅限一张</small></button>
+          <button id="ldcBattleButton" class="ldc-mode-option" type="button" data-input-mode="beta-ldc-battle" data-required-flag="beta-ldc-battle" hidden><span>BETA</span><strong>LDC排位赛</strong><small>50 LDC 门票 · 英文排位 · 每账号仅限一张</small></button>
         </div></div>
-        <section class="input-mode-section hell-mode-section" aria-labelledby="hellModeTitle"><div class="hell-mode-heading"><span class="input-mode-section-title" id="hellModeTitle">地狱模式 · 15 关</span><span class="hell-warning">高难度 · 每个模式每日 10 次</span></div><div class="input-mode-options" role="group" aria-label="地狱游戏模式">
+        <section class="input-mode-section hell-mode-section" aria-labelledby="hellModeTitle"><div class="hell-mode-heading"><span class="input-mode-section-title" id="hellModeTitle">地狱模式 · 15 关</span><span id="hellModeWarning" class="hell-warning">高难度 · 每个模式每日 10 次</span></div><div class="input-mode-options" role="group" aria-label="地狱游戏模式">
           <button class="hell-mode-option locked" type="button" data-input-mode="hell-en" data-unlocked="false" aria-disabled="true"><span>HELL<br>EN</span><strong>地狱英文</strong><small>大学学术词库 · 锁定后整词模糊，考验瞬时记忆<i class="hell-lock-state" data-hell-unlock="hell-en">已封印 · 普通英文完成 10 关解锁</i><b data-hell-attempts="hell-en">今日已挑战 0/10 · 剩余 10 次</b></small></button>
           <button class="hell-mode-option locked" type="button" data-input-mode="hell-zh" data-unlocked="false" aria-disabled="true"><span>HELL<br>中</span><strong>地狱无门</strong><small>繁体生僻字与叠字组合 · 带声调拼音 · 按画面字形输入<i class="hell-input-tip">建议使用U模式拆字输入或者五笔输入法，纯拼音和嘴遁选手建议不要为难自己</i><i class="hell-lock-state" data-hell-unlock="hell-zh">已封印 · 普通中文完成 10 关解锁</i><b data-hell-attempts="hell-zh">今日已挑战 0/10 · 剩余 10 次</b></small></button>
-        </div><p class="input-mode-footnote">先在对应普通模式完整通过 10 关（累计至少 80 击毁）才能解除封印。地狱模式每击毁 8 个目标升一关；完成第 15 关的第 8 个击毁（累计 120 个）后由服务器判定通关，不会生成第 16 关。挑战次数按玩家和模式分别计算，北京时间每日 00:00 重置。</p></section>
+        </div><p id="hellModeFootnote" class="input-mode-footnote">先在对应普通模式完整通过 10 关（累计至少 80 击毁）才能解除封印。地狱模式每击毁 8 个目标升一关；完成第 15 关的第 8 个击毁（累计 120 个）后由服务器判定通关，不会生成第 16 关。挑战次数按玩家和模式分别计算，北京时间每日 00:00 重置。</p></section>
         <p id="inputModeStatus" class="input-mode-status" aria-live="polite"></p>
       </div>
     </dialog>
