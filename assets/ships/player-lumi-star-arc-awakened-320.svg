@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="露米号星弧猎杀号觉醒形态">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8465a1"/>
+      <stop offset=".34" stop-color="#3f3157"/>
+      <stop offset=".72" stop-color="#17152c"/>
+      <stop offset="1" stop-color="#060711"/>
+    </linearGradient>
+    <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#76528d"/>
+      <stop offset=".48" stop-color="#382a50"/>
+      <stop offset="1" stop-color="#111127"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7ff"/>
+      <stop offset=".5" stop-color="#d9c8e7"/>
+      <stop offset="1" stop-color="#7a668d"/>
+    </linearGradient>
+  </defs>
+  <g stroke-linejoin="round" stroke-linecap="round">
+    <path d="M139 123 12 75l24 37 45 29 49 43 18-17Z" fill="url(#wing)" stroke="#d995ff" stroke-width="4"/>
+    <path d="m181 123 127-48-24 37-45 29-49 43-18-17Z" fill="url(#wing)" stroke="#d995ff" stroke-width="4"/>
+    <path d="m128 157-91 35 31 10 65-20Z" fill="#332448" stroke="#efbdff" stroke-width="3"/>
+    <path d="m192 157 91 35-31 10-65-20Z" fill="#332448" stroke="#efbdff" stroke-width="3"/>
+    <path d="m138 184-83 54 39-4 50-28Z" fill="url(#silver)" stroke="#d7bae8" stroke-width="2.5"/>
+    <path d="m182 184 83 54-39-4-50-28Z" fill="url(#silver)" stroke="#d7bae8" stroke-width="2.5"/>
+    <path d="m147 92-32-69 24 16 21 39 21-39 24-16-32 69-13 26Z" fill="#513567" stroke="#efbaff" stroke-width="3.5"/>
+    <path d="M160 38 183 67l8 52-7 65-13 66-11 15-11-15-13-66-7-65 8-52Z" fill="url(#body)" stroke="#d995ff" stroke-width="4"/>
+    <path d="m160 48 13 27-5 56-8 28-8-28-5-56Z" fill="url(#silver)" stroke="#f3ddff" stroke-width="2.5"/>
+    <path d="m160 70 10 29-4 57-6 18-6-18-4-57Z" fill="#76508c" stroke="#d9a7f2" stroke-width="2"/>
+    <path d="m145 166-18 52 21-13 12-24 12 24 21 13-18-52-15 23Z" fill="#39264d" stroke="#d8a6eb" stroke-width="2.5"/>
+    <path d="m143 211-34 50 25-12 22-33Z" fill="#513267" stroke="#e3b4f3" stroke-width="2.5"/>
+    <path d="m177 211 34 50-25-12-22-33Z" fill="#513267" stroke="#e3b4f3" stroke-width="2.5"/>
+    <ellipse cx="160" cy="128" rx="15" ry="25" fill="#f2d2ff" stroke="#fff4ff" stroke-width="3"/>
+    <ellipse cx="160" cy="128" rx="7" ry="16" fill="#bd62ee"/>
+    <circle cx="160" cy="128" r="4" fill="#fff"/>
+    <path d="m26 86 47 19-22 3Z" fill="#e6bcf5"/>
+    <path d="m294 86-47 19 22 3Z" fill="#e6bcf5"/>
+  </g>
+</svg>
