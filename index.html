@@ -21,9 +21,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-CkevHp_k.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-JCl75z6Z.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-CVB42Cn_.css">
+    <script type="module" crossorigin src="/assets/game-BZiKlEzG.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-DT1iw61W.js">
+    <link rel="stylesheet" crossorigin href="/assets/game-D1xRnuJN.css">
   </head>
   <body>
     <main class="app-shell">
@@ -45,6 +45,21 @@
         <div class="stage-wrap">
           <canvas id="gameCanvas" width="960" height="640"></canvas>
           <div id="speedHud" class="speed-hud" hidden aria-live="polite"><span>速度</span><strong id="speed">1.0x</strong></div>
+          <div id="roguelikeDebuffHud" class="roguelike-debuff-hud" hidden aria-live="polite"></div>
+          <div id="energyHud" class="energy-hud" hidden aria-live="polite" aria-label="剩余能量">
+            <div class="energy-meter">
+              <svg viewBox="0 0 52 52" aria-hidden="true" focusable="false">
+                <circle class="energy-ring-track" cx="26" cy="26" r="20"></circle>
+                <circle id="energyRingProgress" class="energy-ring-progress" cx="26" cy="26" r="20" pathLength="125.663706"></circle>
+              </svg>
+              <strong id="energyPercent">100.00%</strong>
+            </div>
+            <span class="energy-label">能量</span>
+          </div>
+          <div id="roguelikeCooldownHud" class="roguelike-cooldown-hud" hidden aria-live="polite" aria-label="弹幕关技能冷却">
+            <span><em>冲刺 CD</em><strong id="roguelikeDashCooldown">就绪</strong></span>
+            <span><em id="roguelikeSkillLabel">Enter 技能</em><strong id="roguelikeSkillCooldown">就绪</strong></span>
+          </div>
           <div id="waveAnnouncement" class="wave-announcement" hidden aria-live="polite">
             <strong id="waveAnnouncementTitle">第 2 波开始</strong>
             <span id="waveAnnouncementDetail">敌方编队正在逼近</span>
@@ -74,14 +89,14 @@
                 <img id="hangarShipImage" src="/assets/ships/player-a-silver-blue-256.webp" alt="当前战机" class="hangar-ship-img" />
               </div>
               <div class="hangar-ship-meta">
-                <span id="hangarShipRarity" class="hangar-ship-rarity">标准战机</span>
-                <strong id="hangarShipName" class="hangar-ship-name">默认战机</strong>
+                <span id="hangarShipRarity" class="hangar-ship-rarity">标准</span>
+                <strong id="hangarShipName" class="hangar-ship-name">夜空号</strong>
                 <span class="hangar-ship-action">点击机库整备 ▸</span>
               </div>
             </div>
             <div id="authPanel" class="auth-panel" aria-live="polite">
               <div id="authSignedOut" class="auth-signed-out">
-                <p id="authMessage" class="auth-message">登录后保存成绩并参与排行榜</p>
+                <p id="authMessage" class="auth-message">登录后保存成绩、参与排行榜及使用远征功能</p>
                 <button id="loginButton" class="linuxdo-login-button" type="button">使用 Linux.do 登录</button>
                 <div class="auth-divider"><span>或</span></div>
                 <button id="inviteLoginButton" class="youth-login-button" type="button">青春版登录</button>
@@ -96,7 +111,7 @@
                   <div class="auth-info">
                     <div class="auth-name-row">
                       <strong id="authUsername"></strong>
-                      <span class="pilot-badge">PILOT</span>
+                      <span class="pilot-badge">驾驶员</span>
                     </div>
                     <span id="authStatus" class="auth-status-text">Linux.do 已登录</span>
                   </div>
@@ -114,8 +129,10 @@
             <p id="connectionNotice" class="connection-notice" hidden></p>
             <div class="menu-feature-cards">
               <button id="gameGuideButton" class="feature-card" type="button">游戏说明</button>
-              <button id="flightSummaryButton" class="feature-card" type="button" disabled>起飞总结</button>
-              <button id="roguelikeHubButton" class="feature-card" type="button" data-required-flag="alpha-roguelike" hidden disabled>无限折跃</button>
+              <button id="storyArchiveButton" class="feature-card" type="button" disabled>剧情档案<small class="feature-card-lock-hint" data-lock="auth">登录后解锁</small></button>
+              <button id="flightSummaryButton" class="feature-card" type="button" disabled>起飞总结<small class="feature-card-lock-hint" data-lock="auth">登录后解锁</small></button>
+              <button id="bossDesignButton" class="feature-card boss-design-entry" type="button" disabled>玩家 BOSS 设计工坊<small class="feature-card-lock-hint" data-lock="planned">即将开放</small></button>
+              <button id="roguelikeHubButton" class="feature-card" type="button" data-required-flag="alpha-roguelike" hidden disabled>无限折跃<small class="feature-card-lock-hint" data-lock="auth">登录后解锁</small></button>
               <button id="updateAnnouncementButton" class="feature-card" type="button">更新公告</button>
             </div>
             <button id="skinSettingsButton" type="button" hidden disabled>皮肤设置</button>
@@ -140,10 +157,11 @@
           </div>
           <div id="roguelikeHub" class="roguelike-hub" hidden>
             <header class="rl-hub-head">
-              <div class="rl-hub-title"><span class="rl-hub-kicker">EXPEDITION HUB</span><h2>空间跃迁母舰</h2></div>
+              <div class="rl-hub-title"><span class="rl-hub-kicker">远征中心</span><h2>空间跃迁母舰</h2></div>
               <div class="rl-hub-wallet">
+                <span class="rl-hub-energy">⚡ <strong data-rl-energy>100.00</strong><small>能量上限</small></span>
                 <span class="rl-hub-crystals">✦ <strong data-rl-crystals>0</strong><small>结晶</small></span>
-                <span class="rl-hub-coins">◉ <strong data-rl-coins>0</strong><small>星币</small></span>
+                <span class="rl-hub-coins">◉ <strong data-rl-coins>0</strong><small>母舰星币</small></span>
               </div>
               <button type="button" class="rl-hub-close close-button" data-rl-close aria-label="关闭母舰专区">×</button>
             </header>
@@ -163,29 +181,56 @@
                 <button type="button" data-rl-tab="codex">图鉴</button>
                 <button type="button" data-rl-tab="history">战绩</button>
                 <button type="button" data-rl-tab="rank">榜单</button>
+                <button type="button" class="rl-story-entry" data-story-open>剧情<span class="rl-story-badge" data-story-unread hidden></span></button>
               </div>
             </nav>
             <section class="rl-hub-panel" data-rl-panel="deploy">
               <div class="rl-deploy-deck">
-                <div class="rl-deploy-hero" data-rl-deploy-hero></div>
-                <div class="rl-domain-heading">
-                  <div><span>WARP DESTINATION</span><strong>选择星域</strong></div>
-                  <small>每个有限星域 35 关 · 每 7 关迎战区域 Boss</small>
+                <nav class="rl-step-nav" data-rl-step-nav aria-label="出击流程">
+                  <button type="button" class="active" data-rl-step-target="recommend">推荐行动</button>
+                  <button type="button" data-rl-step-target="configure">配置阵容</button>
+                  <button type="button" data-rl-step-target="launch">出击确认</button>
+                </nav>
+                <div class="rl-deploy-step" data-rl-step="recommend">
+                  <div class="rl-deploy-hero" data-rl-deploy-hero></div>
+                  <div class="rl-recommend-card" data-rl-recommend></div>
+                  <div class="rl-save-card" data-rl-save hidden></div>
                 </div>
-                <div class="rl-domain-grid" data-rl-domains></div>
-                <div class="rl-stat-grid">
-                  <div><span>最高房间</span><strong data-rl-stat="wave">0</strong></div>
-                  <div><span>最高星区</span><strong data-rl-stat="sector">0</strong></div>
-                  <div><span>最高得分</span><strong data-rl-stat="score">0</strong></div>
-                  <div><span>远征场次</span><strong data-rl-stat="runs">0</strong></div>
-                  <div><span>开局生命</span><strong data-rl-stat="hp">30</strong></div>
-                  <div><span>开局重抽</span><strong data-rl-stat="rerolls">0</strong></div>
+                <div class="rl-deploy-step" data-rl-step="configure" hidden>
+                  <section class="rl-driver-section" aria-label="驾驶员选择">
+                    <div class="rl-driver-heading">
+                      <div><span>阵容配置</span><strong>驾驶员</strong></div>
+                      <small>无品质差异 · 记忆体碎片解锁 · 等级上限 10 · 专属技能只在对应战机触发</small>
+                    </div>
+                    <div class="rl-memory-wallet" data-rl-memory-wallet></div>
+                    <div class="rl-driver-grid" data-rl-drivers></div>
+                  </section>
+                  <div class="rl-domain-heading">
+                    <div><span>折跃目的地</span><strong>选择星域</strong></div>
+                    <small>每个有限星域 35 关 · 每 7 关迎战区域 Boss</small>
+                  </div>
+                  <div class="rl-domain-grid" data-rl-domains></div>
                 </div>
-                <details class="rl-deploy-brief">
-                  <summary>远征规则</summary>
-                  <p>第一、第二、第三星域各 35 关，无尽星域不设终点。每 7 关迎战区域 Boss；清关后从稳定、危险、极危三条路线中选择，敌潮规模、词缀与奖励均不同。</p>
-                </details>
-                <div class="rl-save-card" data-rl-save hidden></div>
+                <div class="rl-deploy-step" data-rl-step="launch" hidden>
+                  <div class="rl-stat-grid">
+                    <div><span>最高房间</span><strong data-rl-stat="wave">0</strong></div>
+                    <div><span>最高星区</span><strong data-rl-stat="sector">0</strong></div>
+                    <div><span>最高得分</span><strong data-rl-stat="score">0</strong></div>
+                    <div><span>远征场次</span><strong data-rl-stat="runs">0</strong></div>
+                    <div><span>开局生命</span><strong data-rl-stat="hp">30</strong></div>
+                    <div><span>能量上限</span><strong data-rl-stat="energy">100.00</strong></div>
+                    <div><span>开局重抽</span><strong data-rl-stat="rerolls">0</strong></div>
+                  </div>
+                  <details class="rl-deploy-brief">
+                    <summary>远征规则</summary>
+                    <ul class="rl-brief-bullets">
+                      <li>每个区域 5 层节点：前 4 层选择航线，第 5 层迎战 Boss。</li>
+                      <li>战斗、精英、维修、商店、事件节点各有收益；已完成的节点不再给奖励。</li>
+                      <li>每区域可消耗 1 个跃迁燃料，返回最近的分叉改道。</li>
+                      <li>第一至第三星域各 35 关，无尽星域不设终点。</li>
+                    </ul>
+                  </details>
+                </div>
                 <div class="rl-deploy-actions">
                   <button type="button" class="rl-primary rl-launch" data-rl-deploy>跃迁开始</button>
                   <button type="button" class="rl-primary rl-launch" data-rl-continue hidden>继续</button>
@@ -203,17 +248,17 @@
             <section class="rl-hub-panel" data-rl-panel="hangar" hidden>
               <div class="rl-growth-intro">
                 <strong>战机强化 / Lv.1–70 · 六阶进阶</strong>
-                <p>强化会平稳提升无限折跃生命、攻击与防御，并保留得分加成；伤害按 ATK、DEF、破甲与暴击由服务器计算。每架战机另有六阶进阶星轨，需要对应战机碎片；各阶效果与条件确定前不会开放扣除。</p>
+                <p>Lv.1–50 强化攻击、防御与能量上限；Lv.50 消耗星核觉醒。夜空号必须先解锁驾驶员 ???；魔法少女号与露米号不受此条件限制。觉醒后的 Lv.51–70 继续强化攻击与能量，并逐步开放射速、移动速度和暴击率。魔法少女号偏高防御与高能量，露米号偏高火力与高机动；每架战机另有六阶进阶星轨。</p>
               </div>
               <div class="rl-material-grid" data-rl-materials></div>
               <div class="rl-ship-grid" data-rl-ships></div>
             </section>
             <section class="rl-hub-panel" data-rl-panel="equipment" hidden>
-              <div class="rl-growth-intro"><strong>远征装备</strong><p>四个栏位已启用，装备内容将在后续版本开放。</p></div>
+              <div class="rl-growth-intro"><strong>远征装备 · 四槽位</strong><p>品质依次为废品（白）、量产（绿 · 双线边框）、星空（蓝 · 发光边框）、不朽（金 · 华丽双边框）；对应强化上限为 +5 / +10 / +15 / +20。引擎加能量上限与耗能减免、装甲加生命与防御、武器加攻击与射速、C 装置加暴击与结算加成，强化提升词缀数值。</p></div>
               <div class="rl-equipment-grid" data-rl-equipment></div>
             </section>
             <section class="rl-hub-panel" data-rl-panel="store" hidden>
-              <div class="rl-growth-intro"><strong>跃迁商城</strong><p>商城接口已开放，当前没有上架商品。</p></div>
+              <div class="rl-growth-intro"><strong>跃迁商城 · 装备批次</strong><p>使用母舰星币购买装备；强化消耗母舰星币与对应品质材料。装备购买后可在“装备”页切换上阵。先用战机等级与天赋稳定通过首个 Boss，再扩展装备收藏。</p></div>
               <div class="rl-store-grid" data-rl-store></div>
             </section>
             <section class="rl-hub-panel" data-rl-panel="codex" hidden>
@@ -241,6 +286,53 @@
               </div>
             </div>
           </div>
+          <div id="roguelikeMapScreen" class="rl-map-screen" role="dialog" aria-modal="true" aria-labelledby="roguelikeMapTitle" hidden>
+            <div class="rl-map-shell">
+              <header class="rl-map-head">
+                <div>
+                  <span class="rl-map-kicker">远征路线</span>
+                  <h2 id="roguelikeMapTitle" data-rl-map-title>选择航线</h2>
+                  <p class="rl-map-subtitle" data-rl-map-subtitle>规划下一段远征</p>
+                </div>
+                <div class="rl-map-wallet">
+                  <span data-rl-map-fuel>燃料 0</span>
+                  <span data-rl-map-coins>星币 0</span>
+                </div>
+              </header>
+              <div class="rl-map-layers" data-rl-map-layers></div>
+              <div class="rl-map-panel" data-rl-map-panel></div>
+              <footer class="rl-map-foot">
+                <button type="button" class="rl-ghost" data-rl-map-save>存档并退出</button>
+                <button type="button" class="rl-danger" data-rl-map-settle>立即结算</button>
+              </footer>
+            </div>
+          </div>
+          <div id="storyArchiveModal" class="story-archive-modal" role="dialog" aria-modal="true" aria-labelledby="storyArchiveTitle" hidden>
+            <div class="story-archive-shell">
+              <header class="story-archive-head">
+                <div class="story-archive-title"><span>STORY ARCHIVE</span><h2 id="storyArchiveTitle">剧情档案</h2></div>
+                <button type="button" class="story-close-button" data-story-close aria-label="关闭剧情档案">×</button>
+              </header>
+              <nav class="story-chapter-tabs" data-story-chapters aria-label="章节"></nav>
+              <div class="story-archive-body">
+                <div data-story-list>
+                  <div class="story-file-list" data-story-files></div>
+                  <p class="story-error" data-story-error hidden></p>
+                </div>
+                <div data-story-reader hidden>
+                  <div class="story-reader-head">
+                    <button type="button" class="story-back-button" data-story-back>← 返回列表</button>
+                    <strong data-story-reader-title></strong>
+                  </div>
+                  <div data-story-reader-body></div>
+                  <div class="story-reader-nav" data-story-reader-nav hidden>
+                    <button type="button" class="story-nav-button" data-story-prev>← 前一部</button>
+                    <button type="button" class="story-nav-button" data-story-next>下一部 →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div id="gameOverOverlay" class="overlay overlay-result" hidden>
             <span class="eyebrow">本局结束</span>
             <h2 id="gameOverTitle">你打完了一把飞机</h2>
@@ -249,17 +341,18 @@
               <div class="settlement-kicker">结算中 <span id="settlementProgress">0 / 7</span></div>
               <div class="settlement-steps">
                 <div class="settlement-step" data-settlement-step="base"><span>基础得分</span><strong id="settlementBaseScore">000000</strong></div>
-                <div class="settlement-step" data-settlement-step="kills"><span>击杀目标</span><strong id="settlementKills">0</strong></div>
-                <div class="settlement-step" data-settlement-step="streak"><span>最高连击</span><strong id="settlementStreak">x0</strong></div>
                 <div class="settlement-step" data-settlement-step="mobile"><span>手机加权</span><strong id="settlementMobileBonus">+000000</strong></div>
-                <div class="settlement-step" data-settlement-step="accuracy"><span>准确率</span><strong id="settlementAccuracy">100%</strong></div>
-                <div class="settlement-step" data-settlement-step="eapm"><span>EAPM 有效操作/分钟</span><strong id="settlementEapm">0</strong></div>
-                <div class="settlement-step" data-settlement-step="wave"><span>到达波次</span><strong id="settlementWave">001</strong></div>
                 <div class="settlement-step" data-settlement-step="crystals" hidden><span>星尘结晶</span><strong id="settlementCrystals">✦0</strong></div>
                 <div class="settlement-step" data-settlement-step="star-coins" hidden><span>强化星币</span><strong id="settlementStarCoins">◉0</strong></div>
                 <div class="settlement-step" data-settlement-step="materials" hidden><span>Boss 材料</span><strong id="settlementMaterials">0</strong></div>
                 <div class="settlement-step" data-settlement-step="rating"><span>本局评分</span><strong id="settlementRating">F- · 0</strong></div>
+                <div class="settlement-step" data-settlement-step="kills"><span>击杀目标</span><strong id="settlementKills">0</strong></div>
+                <div class="settlement-step" data-settlement-step="streak"><span>最高连击</span><strong id="settlementStreak">x0</strong></div>
+                <div class="settlement-step" data-settlement-step="accuracy"><span>准确率</span><strong id="settlementAccuracy">100%</strong></div>
+                <div class="settlement-step" data-settlement-step="eapm"><span title="每分钟有效操作数（Effective Actions Per Minute）">有效操作/分钟（EAPM）</span><strong id="settlementEapm">0</strong></div>
+                <div class="settlement-step" data-settlement-step="wave"><span>到达波次</span><strong id="settlementWave">001</strong></div>
               </div>
+              <p class="settlement-rl-hint" id="settlementRlHint" hidden>本局远征收益已存入母舰，可随时在「无限折跃」中强化战机、装备与天赋。</p>
               <div class="settlement-final" data-settlement-step="final"><span>最终得分</span><strong id="finalScore">000000</strong></div>
             </div>
             <div class="result-grid-legacy" hidden><strong id="finalWave">001</strong><strong id="finalStreak">0</strong><strong id="finalAccuracy">100%</strong></div>
@@ -350,39 +443,54 @@
         </div>
 
         <div id="virtualKeyboard" class="virtual-keyboard" hidden aria-label="游戏虚拟键盘">
-          <div class="keyboard-row keyboard-row-top">
-            <button class="keyboard-key" type="button" data-key="q">q</button>
-            <button class="keyboard-key" type="button" data-key="w">w</button>
-            <button class="keyboard-key" type="button" data-key="e">e</button>
-            <button class="keyboard-key" type="button" data-key="r">r</button>
-            <button class="keyboard-key" type="button" data-key="t">t</button>
-            <button class="keyboard-key" type="button" data-key="y">y</button>
-            <button class="keyboard-key" type="button" data-key="u">u</button>
-            <button class="keyboard-key" type="button" data-key="i">i</button>
-            <button class="keyboard-key" type="button" data-key="o">o</button>
-            <button class="keyboard-key" type="button" data-key="p">p</button>
+          <div id="typingVirtualKeyboard" class="keyboard-typing-layout">
+            <div class="keyboard-row keyboard-row-top">
+              <button class="keyboard-key" type="button" data-key="q">q</button>
+              <button class="keyboard-key" type="button" data-key="w">w</button>
+              <button class="keyboard-key" type="button" data-key="e">e</button>
+              <button class="keyboard-key" type="button" data-key="r">r</button>
+              <button class="keyboard-key" type="button" data-key="t">t</button>
+              <button class="keyboard-key" type="button" data-key="y">y</button>
+              <button class="keyboard-key" type="button" data-key="u">u</button>
+              <button class="keyboard-key" type="button" data-key="i">i</button>
+              <button class="keyboard-key" type="button" data-key="o">o</button>
+              <button class="keyboard-key" type="button" data-key="p">p</button>
+            </div>
+            <div class="keyboard-row keyboard-row-middle">
+              <button class="keyboard-key" type="button" data-key="a">a</button>
+              <button class="keyboard-key" type="button" data-key="s">s</button>
+              <button class="keyboard-key" type="button" data-key="d">d</button>
+              <button class="keyboard-key" type="button" data-key="f">f</button>
+              <button class="keyboard-key" type="button" data-key="g">g</button>
+              <button class="keyboard-key" type="button" data-key="h">h</button>
+              <button class="keyboard-key" type="button" data-key="j">j</button>
+              <button class="keyboard-key" type="button" data-key="k">k</button>
+              <button class="keyboard-key" type="button" data-key="l">l</button>
+            </div>
+            <div class="keyboard-row keyboard-row-bottom">
+              <button class="keyboard-key" type="button" data-key="z">z</button>
+              <button class="keyboard-key" type="button" data-key="x">x</button>
+              <button class="keyboard-key" type="button" data-key="c">c</button>
+              <button class="keyboard-key" type="button" data-key="v">v</button>
+              <button class="keyboard-key" type="button" data-key="b">b</button>
+              <button class="keyboard-key" type="button" data-key="n">n</button>
+              <button class="keyboard-key" type="button" data-key="m">m</button>
+              <button class="keyboard-key" type="button" data-key="-">-</button>
+              <button class="keyboard-key keyboard-key-cancel" type="button" data-key=" " aria-label="取消锁定" title="空格取消锁定">空格 / 取消</button>
+            </div>
           </div>
-          <div class="keyboard-row keyboard-row-middle">
-            <button class="keyboard-key" type="button" data-key="a">a</button>
-            <button class="keyboard-key" type="button" data-key="s">s</button>
-            <button class="keyboard-key" type="button" data-key="d">d</button>
-            <button class="keyboard-key" type="button" data-key="f">f</button>
-            <button class="keyboard-key" type="button" data-key="g">g</button>
-            <button class="keyboard-key" type="button" data-key="h">h</button>
-            <button class="keyboard-key" type="button" data-key="j">j</button>
-            <button class="keyboard-key" type="button" data-key="k">k</button>
-            <button class="keyboard-key" type="button" data-key="l">l</button>
-          </div>
-          <div class="keyboard-row keyboard-row-bottom">
-            <button class="keyboard-key" type="button" data-key="z">z</button>
-            <button class="keyboard-key" type="button" data-key="x">x</button>
-            <button class="keyboard-key" type="button" data-key="c">c</button>
-            <button class="keyboard-key" type="button" data-key="v">v</button>
-            <button class="keyboard-key" type="button" data-key="b">b</button>
-            <button class="keyboard-key" type="button" data-key="n">n</button>
-            <button class="keyboard-key" type="button" data-key="m">m</button>
-            <button class="keyboard-key" type="button" data-key="-">-</button>
-            <button class="keyboard-key keyboard-key-cancel" type="button" data-key=" " aria-label="取消锁定" title="空格取消锁定">空格 / 取消</button>
+          <div id="danmakuVirtualKeyboard" class="keyboard-danmaku-layout" hidden aria-label="弹幕关控制键盘">
+            <div class="keyboard-dpad" aria-label="战机移动">
+              <button class="keyboard-key keyboard-control-key keyboard-control-up" type="button" data-control-key="ArrowUp" aria-label="向上移动">▲</button>
+              <button class="keyboard-key keyboard-control-key keyboard-control-left" type="button" data-control-key="ArrowLeft" aria-label="向左移动">◀</button>
+              <button class="keyboard-key keyboard-control-key keyboard-control-down" type="button" data-control-key="ArrowDown" aria-label="向下移动">▼</button>
+              <button class="keyboard-key keyboard-control-key keyboard-control-right" type="button" data-control-key="ArrowRight" aria-label="向右移动">▶</button>
+            </div>
+            <div class="keyboard-action-layout" aria-label="弹幕关动作">
+              <button class="keyboard-key keyboard-action-key keyboard-action-skill" type="button" data-control-key="Enter" aria-label="回车释放战机技能"><strong>↵ Enter</strong><small>技能</small></button>
+              <button class="keyboard-key keyboard-action-key keyboard-action-dash" type="button" data-control-key=" " aria-label="空格冲刺"><strong>空格</strong><small>冲刺</small></button>
+              <button class="keyboard-key keyboard-action-key keyboard-action-focus" type="button" data-control-key="Shift" aria-label="Shift精细移动"><strong>SHIFT</strong><small>精细移动</small></button>
+            </div>
           </div>
         </div>
 
@@ -401,6 +509,9 @@
         <button id="inviteAuthSubmit" class="primary-button" type="submit">注册并登录</button>
       </form>
     </dialog>
+    <dialog id="bossDesignDialog" class="boss-design-dialog" aria-labelledby="bossDesignDialogTitle">
+      <div id="bossDesignWorkshop"></div>
+    </dialog>
     <dialog id="inputModeDialog" class="input-mode-dialog">
       <div>
         <div class="input-mode-heading"><div><span class="eyebrow">SELECT MODE</span><h2>选择游戏模式</h2></div><button id="inputModeClose" type="button" aria-label="关闭模式选择">×</button></div>
@@ -412,7 +523,7 @@
           <button id="arenaButton" class="arena-mode-option" type="button" disabled><span>S1</span><strong>竞技对战</strong><small>三分钟实时对战，与对手挑战相同的英文敌机序列</small></button>
           <button id="customModeButton" class="custom-mode-option" type="button"><span>LAB</span><strong>自定义游戏</strong><small>导入本地词库，自选单人或双人房间，不计入排行榜</small></button>
           <button id="ldcBattleButton" class="ldc-mode-option" type="button" data-input-mode="beta-ldc-battle" data-required-flag="beta-ldc-battle" hidden><span>BETA</span><strong>LDC排位赛</strong><small>每张50 LDC · 英文排位 · 每天最多参加5次 · 最多购买5张门票</small></button>
-          <button id="roguelikeModeButton" class="roguelike-mode-option" type="button" data-input-mode="roguelike" data-required-flag="alpha-roguelike" hidden><span>ALPHA</span><strong>无限折跃</strong><small>房间链远征 · 文字破盾 · 自动攻击血条目标 · Boss 弹幕规避</small></button>
+          <button id="roguelikeModeButton" class="roguelike-mode-option" type="button" data-input-mode="roguelike" data-required-flag="alpha-roguelike" hidden><span>ALPHA</span><strong>无限折跃</strong><small>节点图远征 · 规划分支航线 · 文字破盾与弹幕战斗</small></button>
         </div></div>
         <section class="input-mode-section hell-mode-section" aria-labelledby="hellModeTitle"><div class="hell-mode-heading"><span class="input-mode-section-title" id="hellModeTitle">地狱模式 · 15 关</span><span id="hellModeWarning" class="hell-warning">高难度 · 每个模式每日 10 次</span></div><div class="input-mode-options" role="group" aria-label="地狱游戏模式">
           <button class="hell-mode-option locked" type="button" data-input-mode="hell-en" data-unlocked="false" aria-disabled="true"><span>HELL<br>EN</span><strong>地狱英文</strong><small>大学学术词库 · 锁定后整词模糊，考验瞬时记忆<i class="hell-lock-state" data-hell-unlock="hell-en">已封印 · 普通英文完成 10 关解锁</i><b data-hell-attempts="hell-en">今日已挑战 0/10 · 剩余 10 次</b></small></button>
@@ -531,20 +642,16 @@
               <g class="ring-c"><ellipse cx="120" cy="120" rx="120" ry="58" fill="none" stroke="#9fe4f6" stroke-width="1.2" stroke-dasharray="0.1 12" stroke-linecap="round" opacity=".4"/></g>
             </svg>
             <canvas id="projectilePreviewCanvas" class="projectile-preview-canvas" aria-hidden="true"></canvas>
-            <img id="skinPreviewImage" class="skin-preview-ship" src="/assets/ships/player-a-silver-blue-256.webp" alt="默认战机预览" />
+            <img id="skinPreviewImage" class="skin-preview-ship" src="/assets/ships/player-a-silver-blue-256.webp" alt="夜空号预览" />
           </div>
           <span id="skinPreviewLock" class="skin-preview-lock" hidden>仅后台发放</span>
           <button id="skinPreviewPrev" class="skin-preview-nav skin-preview-nav-prev" type="button" aria-label="上一个皮肤"><span class="nav-arrow" aria-hidden="true">‹</span></button>
           <button id="skinPreviewNext" class="skin-preview-nav skin-preview-nav-next" type="button" aria-label="下一个皮肤"><span class="nav-arrow" aria-hidden="true">›</span></button>
         </div>
-        <div class="skin-preview-copy"><div><span id="skinPreviewRarity">标准</span><h3 id="skinPreviewName">默认战机</h3></div><p id="skinPreviewDescription">银白与钴蓝涂装的标准战机。</p></div>
+        <div class="skin-preview-copy"><div><span id="skinPreviewRarity">标准</span><h3 id="skinPreviewName">夜空号</h3></div><p id="skinPreviewDescription">夜空号，尘封已久的战机，曾经某位天才设计师的得意之作，拥有联邦之最的操作难度，只有天才驾驶员才能驾驭其战斗，却也无法完全发挥它的性能。联邦纪？？？？年，曾有一人驾驶它以猩红的光芒撕裂了敌军的进攻阵型，深入敌后，重创敌军基地，斩首敌军指挥官，且成功返回，但其驾驶员却神秘消失。</p></div>
         <div id="skinOptionList" class="skin-option-list" role="listbox" aria-label="可预览皮肤"></div>
         <p id="skinSettingsStatus" class="skin-settings-status" aria-live="polite"></p>
         <button id="skinEquipButton" class="primary-button" type="button">正在读取权限</button>
-        <div class="loadout-divider"><span>子弹特效</span><small>常规特效可独立装备</small></div>
-        <div id="projectileOptionList" class="projectile-option-list" role="listbox" aria-label="可预览子弹特效"></div>
-        <p id="projectileSettingsStatus" class="skin-settings-status" aria-live="polite"></p>
-        <button id="projectileEquipButton" class="secondary-button" type="button">装备子弹特效</button>
       </div>
     </dialog>
     <dialog id="mobileArenaDialog" class="mobile-arena-dialog">

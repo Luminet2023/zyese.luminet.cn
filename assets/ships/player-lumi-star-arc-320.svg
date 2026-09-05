@@ -1,39 +1,131 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="露米号星弧猎杀号标准形态">
   <defs>
-    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#7fa8b8"/>
-      <stop offset=".34" stop-color="#31546a"/>
-      <stop offset=".72" stop-color="#142c43"/>
-      <stop offset="1" stop-color="#071522"/>
+    <!-- 纯洁珍珠白主装甲 -->
+    <linearGradient id="whitePlate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#f4f9fd"/>
+      <stop offset="80%" stop-color="#d8e8f5"/>
+      <stop offset="100%" stop-color="#b8d1e5"/>
     </linearGradient>
-    <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#4a7890"/>
-      <stop offset=".48" stop-color="#25485f"/>
-      <stop offset="1" stop-color="#0b2033"/>
+    <!-- 高光纯白反光面 -->
+    <linearGradient id="whiteHighlight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#eaf3fb"/>
     </linearGradient>
-    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f2fbfc"/>
-      <stop offset=".5" stop-color="#aec9d2"/>
-      <stop offset="1" stop-color="#668a9d"/>
+    <!-- 暗银钛合金内构底盘 -->
+    <linearGradient id="innerTitanium" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b4f66"/>
+      <stop offset="50%" stop-color="#223347"/>
+      <stop offset="100%" stop-color="#121d2b"/>
     </linearGradient>
+    <!-- 露米星芒黄金流光 -->
+    <linearGradient id="lumiGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fffde6"/>
+      <stop offset="35%" stop-color="#ffe14d"/>
+      <stop offset="100%" stop-color="#ff9d00"/>
+    </linearGradient>
+    <!-- 灵动水青水晶座舱 -->
+    <linearGradient id="cyanCrystal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8ffff"/>
+      <stop offset="30%" stop-color="#6ef3ff"/>
+      <stop offset="75%" stop-color="#13bee2"/>
+      <stop offset="100%" stop-color="#087094"/>
+    </linearGradient>
+    <!-- 半透明晶羽光刃 -->
+    <linearGradient id="bladeGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".9"/>
+      <stop offset="40%" stop-color="#c9f8ff" stop-opacity=".75"/>
+      <stop offset="100%" stop-color="#46d6f7" stop-opacity=".4"/>
+    </linearGradient>
+    <!-- 柔和发光滤镜 -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
   </defs>
+
   <g stroke-linejoin="round" stroke-linecap="round">
-    <path d="M142 126 30 88l24 31 40 23 40 34 14-12Z" fill="url(#wing)" stroke="#ffe45d" stroke-width="4"/>
-    <path d="m178 126 112-38-24 31-40 23-40 34-14-12Z" fill="url(#wing)" stroke="#ffe45d" stroke-width="4"/>
-    <path d="m118 129-64-23 18 20 35 14Z" fill="#75a6b9" stroke="#d8f4f5" stroke-width="2"/>
-    <path d="m202 129 64-23-18 20-35 14Z" fill="#75a6b9" stroke="#d8f4f5" stroke-width="2"/>
-    <path d="m126 154-52-4 18 18 38 9Z" fill="#315b72" stroke="#9bcbd5" stroke-width="2"/>
-    <path d="m194 154 52-4-18 18-38 9Z" fill="#315b72" stroke="#9bcbd5" stroke-width="2"/>
-    <path d="m137 181-70 31 34 1 39-18Z" fill="url(#silver)" stroke="#b8d8de" stroke-width="2.5"/>
-    <path d="m183 181 70 31-34 1-39-18Z" fill="url(#silver)" stroke="#b8d8de" stroke-width="2.5"/>
-    <path d="M160 42 181 68l8 51-7 63-12 64-10 13-10-13-12-64-7-63 8-51Z" fill="url(#body)" stroke="#ffe45d" stroke-width="4"/>
-    <path d="m160 52 12 24-4 53-8 26-8-26-4-53Z" fill="url(#silver)" stroke="#d7eff1" stroke-width="2.5"/>
-    <path d="m160 72 9 26-4 55-5 16-5-16-4-55Z" fill="#43819c" stroke="#aee9f0" stroke-width="2"/>
-    <path d="m145 167-15 47 18-11 12-25 12 25 18 11-15-47-15 21Z" fill="#264c64" stroke="#9bc9d3" stroke-width="2.5"/>
-    <path d="m143 214-27 41 20-10 20-28Z" fill="#37677e" stroke="#b0d9df" stroke-width="2.5"/>
-    <path d="m177 214 27 41-20-10-20-28Z" fill="#37677e" stroke="#b0d9df" stroke-width="2.5"/>
-    <ellipse cx="160" cy="130" rx="12" ry="22" fill="#b9fbff" stroke="#ecffff" stroke-width="3"/>
-    <ellipse cx="160" cy="130" rx="5" ry="13" fill="#56cce4"/>
-    <circle cx="160" cy="130" r="3" fill="#fff"/>
+    <!-- === 1. 底层：暗钛合金机翼骨架与外掠主翼 === -->
+    <!-- 左主翼基座 -->
+    <path d="M140 120 L28 82 L42 120 L86 148 L136 172 L142 144 Z" fill="url(#innerTitanium)" stroke="url(#lumiGold)" stroke-width="2"/>
+    <!-- 右主翼基座 -->
+    <path d="M180 120 L292 82 L278 120 L234 148 L184 172 L178 144 Z" fill="url(#innerTitanium)" stroke="url(#lumiGold)" stroke-width="2"/>
+
+    <!-- 半透明星弧能量光刃 (左主翼) -->
+    <path d="M136 122 L40 88 L54 118 L96 144 L138 156 Z" fill="url(#bladeGlass)" stroke="#eaffff" stroke-width="1.2"/>
+    <!-- 半透明星弧能量光刃 (右主翼) -->
+    <path d="M184 122 L280 88 L266 118 L224 144 L182 156 Z" fill="url(#bladeGlass)" stroke="#eaffff" stroke-width="1.2"/>
+
+    <!-- 翼尖青光能量脉冲发生器 -->
+    <path d="M46 90 L30 84 L38 106 Z" fill="url(#cyanCrystal)"/>
+    <path d="M274 90 L290 84 L282 106 Z" fill="url(#cyanCrystal)"/>
+
+    <!-- === 2. 中层：纯白多层折角外翼装甲 === -->
+    <!-- 左主翼白装甲板 -->
+    <path d="M138 132 L56 104 L74 136 L122 158 L142 146 Z" fill="url(#whitePlate)" stroke="#9fc2dc" stroke-width="1.5"/>
+    <path d="M134 134 L68 108 L80 128 L124 148 Z" fill="url(#whiteHighlight)"/>
+    <!-- 右主翼白装甲板 -->
+    <path d="M182 132 L264 104 L246 136 L198 158 L178 146 Z" fill="url(#whitePlate)" stroke="#9fc2dc" stroke-width="1.5"/>
+    <path d="M186 134 L252 108 L240 128 L196 148 Z" fill="url(#whiteHighlight)"/>
+
+    <!-- 翼面星芒金能量流线 (左/右) -->
+    <path d="M132 142 L80 120 L96 134 L128 150" stroke="url(#lumiGold)" stroke-width="2" fill="none"/>
+    <path d="M188 142 L240 120 L224 134 L192 150" stroke="url(#lumiGold)" stroke-width="2" fill="none"/>
+
+    <!-- === 3. 中后层：前掠副翼与进气导流道 === -->
+    <!-- 左副羽前掠翼 -->
+    <path d="M134 162 L62 174 L84 194 L126 186 Z" fill="url(#whitePlate)" stroke="url(#lumiGold)" stroke-width="1.8"/>
+    <path d="M124 168 L76 178 L90 188 L122 182 Z" fill="url(#cyanCrystal)" opacity=".8"/>
+    <!-- 右副羽前掠翼 -->
+    <path d="M186 162 L258 174 L236 194 L194 186 Z" fill="url(#whitePlate)" stroke="url(#lumiGold)" stroke-width="1.8"/>
+    <path d="M196 168 L244 178 L230 188 L198 182 Z" fill="url(#cyanCrystal)" opacity=".8"/>
+
+    <!-- === 4. 后方：白色悬浮尾舵与双发引擎 === -->
+    <!-- 左悬浮尾舵 -->
+    <path d="M136 208 L92 254 L116 258 L144 224 Z" fill="url(#whitePlate)" stroke="#9ec1db" stroke-width="1.8"/>
+    <path d="M132 214 L102 248 L114 250 L138 222 Z" fill="url(#lumiGold)"/>
+    <!-- 右悬浮尾舵 -->
+    <path d="M184 208 L228 254 L204 258 L176 224 Z" fill="url(#whitePlate)" stroke="#9ec1db" stroke-width="1.8"/>
+    <path d="M188 214 L218 248 L206 250 L182 222 Z" fill="url(#lumiGold)"/>
+
+    <!-- 双侧引擎喷口金环 (配合游戏引擎粒子) -->
+    <path d="M138 216 L124 242 L138 244 L146 222 Z" fill="url(#innerTitanium)" stroke="url(#lumiGold)" stroke-width="1.8"/>
+    <path d="M182 216 L196 242 L182 244 L174 222 Z" fill="url(#innerTitanium)" stroke="url(#lumiGold)" stroke-width="1.8"/>
+    <!-- 引擎喷射口荧光芯 -->
+    <ellipse cx="131" cy="242" rx="5" ry="3" fill="#69f0ff"/>
+    <ellipse cx="189" cy="242" rx="5" ry="3" fill="#69f0ff"/>
+
+    <!-- === 5. 顶层：修长利落的纯白主机身 === -->
+    <!-- 分叉锐利机首 (白色双尖矛锋) -->
+    <path d="M154 36 L144 82 L154 92 L158 52 Z" fill="url(#whitePlate)" stroke="url(#lumiGold)" stroke-width="1.8"/>
+    <path d="M166 36 L176 82 L166 92 L162 52 Z" fill="url(#whitePlate)" stroke="url(#lumiGold)" stroke-width="1.8"/>
+    <circle cx="154" cy="38" r="2.2" fill="#fffbe0"/>
+    <circle cx="166" cy="38" r="2.2" fill="#fffbe0"/>
+
+    <!-- 主机体白色龙骨大装甲 -->
+    <path d="M160 44 L174 82 L184 130 L178 194 L168 232 L160 238 L152 232 L142 194 L136 130 L146 82 Z" fill="url(#whitePlate)" stroke="url(#lumiGold)" stroke-width="2.5"/>
+
+    <!-- 侧身白色折线流光导流肩甲 -->
+    <path d="M146 94 L126 132 L138 180 L148 176 L142 134 Z" fill="url(#whitePlate)" stroke="#9fc2dc" stroke-width="1.5"/>
+    <path d="M174 94 L194 132 L182 180 L172 176 L178 134 Z" fill="url(#whitePlate)" stroke="#9fc2dc" stroke-width="1.5"/>
+
+    <!-- 机身两侧金光能量刻线 -->
+    <path d="M148 104 Q136 136 144 168" stroke="url(#lumiGold)" stroke-width="2" fill="none"/>
+    <path d="M172 104 Q184 136 176 168" stroke="url(#lumiGold)" stroke-width="2" fill="none"/>
+
+    <!-- 水滴形水晶座舱 (青玉晶莹高光) -->
+    <path d="M160 68 Q170 98 168 128 Q160 142 160 142 Q160 142 152 128 Q150 98 160 68 Z" fill="url(#cyanCrystal)" stroke="#ffffff" stroke-width="2"/>
+    <path d="M158 74 Q164 92 163 114" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <ellipse cx="160" cy="80" rx="2.5" ry="4.5" fill="#ffffff"/>
+
+    <!-- 中心星核反应炉微晶胸针 -->
+    <g filter="url(#glow)">
+      <path d="M160 142 L168 152 L160 162 L152 152 Z" fill="#ffd54f"/>
+      <circle cx="160" cy="152" r="7.5" fill="url(#cyanCrystal)" stroke="#ffffff" stroke-width="1.8"/>
+      <circle cx="160" cy="152" r="3.8" fill="#ffffff"/>
+    </g>
+
+    <!-- 尾部流线收束金件 -->
+    <path d="M156 194 L160 222 L164 194 L160 182 Z" fill="url(#lumiGold)"/>
   </g>
 </svg>

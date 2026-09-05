@@ -1,40 +1,114 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="露米号星弧猎杀号觉醒形态">
   <defs>
-    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#8465a1"/>
-      <stop offset=".34" stop-color="#3f3157"/>
-      <stop offset=".72" stop-color="#17152c"/>
-      <stop offset="1" stop-color="#060711"/>
+    <!-- 觉醒珍珠白主装甲 -->
+    <linearGradient id="whiteAwkPlate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#f8edff"/>
+      <stop offset="80%" stop-color="#dec4ff"/>
+      <stop offset="100%" stop-color="#b68eff"/>
     </linearGradient>
-    <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#76528d"/>
-      <stop offset=".48" stop-color="#382a50"/>
-      <stop offset="1" stop-color="#111127"/>
+    <!-- 暗曜紫合金底盘 -->
+    <linearGradient id="purpleChassis" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3d1b64"/>
+      <stop offset="50%" stop-color="#240c3d"/>
+      <stop offset="100%" stop-color="#0f031c"/>
     </linearGradient>
-    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fff7ff"/>
-      <stop offset=".5" stop-color="#d9c8e7"/>
-      <stop offset="1" stop-color="#7a668d"/>
+    <!-- 魅粉紫电能量边 -->
+    <linearGradient id="neonPurple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#ff9cf7"/>
+      <stop offset="70%" stop-color="#c942ff"/>
+      <stop offset="100%" stop-color="#7e00e8"/>
     </linearGradient>
+    <!-- 极光紫晶半透明切羽 -->
+    <linearGradient id="purpleBladeGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset="35%" stop-color="#f7baff" stop-opacity=".8"/>
+      <stop offset="75%" stop-color="#b84eff" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#5500aa" stop-opacity=".25"/>
+    </linearGradient>
+    <!-- 觉醒白紫星芒核心 -->
+    <radialGradient id="awkCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#ffebff"/>
+      <stop offset="65%" stop-color="#d66aff"/>
+      <stop offset="100%" stop-color="#6f00c2"/>
+    </radialGradient>
+    <!-- 觉醒辉光滤镜 -->
+    <filter id="awkGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
   </defs>
+
   <g stroke-linejoin="round" stroke-linecap="round">
-    <path d="M139 123 12 75l24 37 45 29 49 43 18-17Z" fill="url(#wing)" stroke="#d995ff" stroke-width="4"/>
-    <path d="m181 123 127-48-24 37-45 29-49 43-18-17Z" fill="url(#wing)" stroke="#d995ff" stroke-width="4"/>
-    <path d="m128 157-91 35 31 10 65-20Z" fill="#332448" stroke="#efbdff" stroke-width="3"/>
-    <path d="m192 157 91 35-31 10-65-20Z" fill="#332448" stroke="#efbdff" stroke-width="3"/>
-    <path d="m138 184-83 54 39-4 50-28Z" fill="url(#silver)" stroke="#d7bae8" stroke-width="2.5"/>
-    <path d="m182 184 83 54-39-4-50-28Z" fill="url(#silver)" stroke="#d7bae8" stroke-width="2.5"/>
-    <path d="m147 92-32-69 24 16 21 39 21-39 24-16-32 69-13 26Z" fill="#513567" stroke="#efbaff" stroke-width="3.5"/>
-    <path d="M160 38 183 67l8 52-7 65-13 66-11 15-11-15-13-66-7-65 8-52Z" fill="url(#body)" stroke="#d995ff" stroke-width="4"/>
-    <path d="m160 48 13 27-5 56-8 28-8-28-5-56Z" fill="url(#silver)" stroke="#f3ddff" stroke-width="2.5"/>
-    <path d="m160 70 10 29-4 57-6 18-6-18-4-57Z" fill="#76508c" stroke="#d9a7f2" stroke-width="2"/>
-    <path d="m145 166-18 52 21-13 12-24 12 24 21 13-18-52-15 23Z" fill="#39264d" stroke="#d8a6eb" stroke-width="2.5"/>
-    <path d="m143 211-34 50 25-12 22-33Z" fill="#513267" stroke="#e3b4f3" stroke-width="2.5"/>
-    <path d="m177 211 34 50-25-12-22-33Z" fill="#513267" stroke="#e3b4f3" stroke-width="2.5"/>
-    <ellipse cx="160" cy="128" rx="15" ry="25" fill="#f2d2ff" stroke="#fff4ff" stroke-width="3"/>
-    <ellipse cx="160" cy="128" rx="7" ry="16" fill="#bd62ee"/>
-    <circle cx="160" cy="128" r="4" fill="#fff"/>
-    <path d="m26 86 47 19-22 3Z" fill="#e6bcf5"/>
-    <path d="m294 86-47 19 22 3Z" fill="#e6bcf5"/>
+    <!-- === 1. 最底层：三段全开六翼星弧紫晶刃翼 === -->
+    <!-- 上段星羽 (左/右) -->
+    <path d="M144 108 L16 44 L34 90 L94 118 L140 134 Z" fill="url(#purpleChassis)" stroke="url(#neonPurple)" stroke-width="2.5"/>
+    <path d="M176 108 L304 44 L286 90 L226 118 L180 134 Z" fill="url(#purpleChassis)" stroke="url(#neonPurple)" stroke-width="2.5"/>
+    <path d="M140 112 L28 54 L44 88 L98 112 L138 126 Z" fill="url(#purpleBladeGlass)" stroke="#fff" stroke-width="1.2"/>
+    <path d="M180 112 L292 54 L276 88 L222 112 L182 126 Z" fill="url(#purpleBladeGlass)" stroke="#fff" stroke-width="1.2"/>
+
+    <!-- 中段巨大展开星弧切刃 (左/右) -->
+    <path d="M136 138 L6 128 L28 164 L84 176 L136 168 Z" fill="url(#whiteAwkPlate)" stroke="url(#neonPurple)" stroke-width="3"/>
+    <path d="M184 138 L314 128 L292 164 L236 176 L184 168 Z" fill="url(#whiteAwkPlate)" stroke="url(#neonPurple)" stroke-width="3"/>
+    <path d="M130 144 L22 134 L42 162 L94 170 L132 160 Z" fill="url(#purpleBladeGlass)"/>
+    <path d="M190 144 L298 134 L278 162 L226 170 L188 160 Z" fill="url(#purpleBladeGlass)"/>
+
+    <!-- 下段浮游尾羽 (左/右) -->
+    <path d="M138 180 L44 222 L74 240 L128 210 Z" fill="url(#whiteAwkPlate)" stroke="url(#neonPurple)" stroke-width="2.2"/>
+    <path d="M182 180 L276 222 L246 240 L192 210 Z" fill="url(#whiteAwkPlate)" stroke="url(#neonPurple)" stroke-width="2.2"/>
+    <path d="M134 184 L58 222 L78 234 L126 206 Z" fill="url(#purpleBladeGlass)"/>
+    <path d="M186 184 L262 222 L242 234 L194 206 Z" fill="url(#purpleBladeGlass)"/>
+
+    <!-- 翼梢能量高光点 -->
+    <circle cx="17" cy="46" r="3" fill="#ffffff" filter="url(#awkGlow)"/>
+    <circle cx="303" cy="46" r="3" fill="#ffffff" filter="url(#awkGlow)"/>
+    <circle cx="8" cy="130" r="3.5" fill="#ffffff" filter="url(#awkGlow)"/>
+    <circle cx="312" cy="130" r="3.5" fill="#ffffff" filter="url(#awkGlow)"/>
+
+    <!-- === 2. 尾部推进器与悬浮紫电白尾舵 === -->
+    <path d="M134 210 L94 270 L118 272 L144 230 Z" fill="url(#whiteAwkPlate)" stroke="#e49aff" stroke-width="2"/>
+    <path d="M186 210 L226 270 L202 272 L176 230 Z" fill="url(#whiteAwkPlate)" stroke="#e49aff" stroke-width="2"/>
+    <!-- 双发紫晶推进喷口 -->
+    <ellipse cx="130" cy="250" rx="6" ry="3.5" fill="#f5b8ff" filter="url(#awkGlow)"/>
+    <ellipse cx="190" cy="250" rx="6" ry="3.5" fill="#f5b8ff" filter="url(#awkGlow)"/>
+
+    <!-- === 3. 顶层：纯白配紫电女武神主龙骨 === -->
+    <!-- 升起的星之双角/双脊冠冕 -->
+    <path d="M148 20 L138 74 L152 84 L156 42 Z" fill="url(#whiteAwkPlate)" stroke="url(#neonPurple)" stroke-width="2"/>
+    <path d="M172 20 L182 74 L168 84 L164 42 Z" fill="url(#whiteAwkPlate)" stroke="url(#neonPurple)" stroke-width="2"/>
+    <circle cx="148" cy="22" r="2.8" fill="#ffffff"/>
+    <circle cx="172" cy="22" r="2.8" fill="#ffffff"/>
+
+    <!-- 机身纯白龙骨装甲 -->
+    <path d="M160 32 L178 72 L190 124 L182 194 L170 234 L160 242 L150 234 L138 194 L130 124 L142 72 Z" fill="url(#whiteAwkPlate)" stroke="url(#neonPurple)" stroke-width="3"/>
+
+    <!-- 侧身立体白装甲鳞片 -->
+    <path d="M142 86 L116 130 L132 184 L146 178 L138 132 Z" fill="url(#whiteAwkPlate)" stroke="#cf83ff" stroke-width="1.8"/>
+    <path d="M178 86 L204 130 L188 184 L174 178 L182 132 Z" fill="url(#whiteAwkPlate)" stroke="#cf83ff" stroke-width="1.8"/>
+
+    <!-- 觉醒紫电脉冲流光线 -->
+    <path d="M144 94 Q126 132 138 170" stroke="#ff7eff" stroke-width="2.5" fill="none"/>
+    <path d="M176 94 Q194 132 182 170" stroke="#ff7eff" stroke-width="2.5" fill="none"/>
+
+    <!-- 觉醒星晶座舱 (白紫璀璨能量晶石) -->
+    <path d="M160 58 Q172 92 170 128 Q160 142 160 142 Q160 142 150 128 Q148 92 160 58 Z" fill="url(#awkCore)" stroke="#ffffff" stroke-width="2.5"/>
+    <path d="M158 64 Q164 84 163 110" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- 核心爆发：六芒星环与白热星核 (EAPM 200 觉醒核心) -->
+    <g filter="url(#awkGlow)">
+      <path d="M160 134 L164 140 L160 146 L156 140 Z" fill="#ffffff"/>
+      <path d="M160 162 L164 168 L160 174 L156 168 Z" fill="#ffffff"/>
+      <path d="M144 150 L150 154 L144 158 L138 154 Z" fill="#ffffff"/>
+      <path d="M176 150 L182 154 L176 158 L170 154 Z" fill="#ffffff"/>
+
+      <circle cx="160" cy="154" r="14" fill="none" stroke="#ffafff" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <circle cx="160" cy="154" r="9" fill="url(#awkCore)" stroke="#ffffff" stroke-width="2"/>
+      <circle cx="160" cy="154" r="5" fill="#ffffff"/>
+    </g>
+
+    <!-- 尾部收束晶锥 -->
+    <path d="M154 200 L160 230 L166 200 L160 186 Z" fill="url(#neonPurple)"/>
   </g>
 </svg>
