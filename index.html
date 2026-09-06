@@ -21,9 +21,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-_lxjmhct.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-DqyuVGe-.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-D1xRnuJN.css">
+    <script type="module" crossorigin src="/assets/game-MxMn0Gdo.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-CCnUTWTf.js">
+    <link rel="stylesheet" crossorigin href="/assets/game-BjUfzSU4.css">
   </head>
   <body>
     <main class="app-shell">
@@ -125,6 +125,8 @@
               </div>
             </div>
             <button id="startButton" class="primary-button start-game-button" type="button" disabled><span>正在检查登录状态</span><i class="start-button-edge start-button-edge-top" aria-hidden="true"></i><i class="start-button-edge start-button-edge-bottom" aria-hidden="true"></i><i class="start-button-spark start-button-spark-left" aria-hidden="true"></i><i class="start-button-spark start-button-spark-right" aria-hidden="true"></i></button>
+            <button id="vectorJumpButton" class="vector-jump-button" type="button" hidden disabled><span class="vector-jump-badge">主模式</span><strong>矢量跃迁</strong><small>星域远征 · 节点航线 · 文字破盾与弹幕战斗</small></button>
+            <button id="typingLadderButton" class="typing-ladder-button" type="button"><span>打字冲榜</span><small>单人 · 竞技 · 地狱 · 自定义</small></button>
             <p id="controlHint" class="control-hint">点击开始后选择游戏模式 · 空格取消锁定</p>
             <p id="connectionNotice" class="connection-notice" hidden></p>
             <div class="menu-feature-cards">
@@ -132,7 +134,6 @@
               <button id="storyArchiveButton" class="feature-card" type="button" disabled>剧情档案<small class="feature-card-lock-hint" data-lock="auth">登录后解锁</small></button>
               <button id="flightSummaryButton" class="feature-card" type="button" disabled>起飞总结<small class="feature-card-lock-hint" data-lock="auth">登录后解锁</small></button>
               <button id="bossDesignButton" class="feature-card boss-design-entry" type="button" disabled>玩家 BOSS 设计工坊<small class="feature-card-lock-hint" data-lock="planned">即将开放</small></button>
-              <button id="roguelikeHubButton" class="feature-card" type="button" data-required-flag="alpha-roguelike" hidden disabled>无限折跃<small class="feature-card-lock-hint" data-lock="auth">登录后解锁</small></button>
               <button id="updateAnnouncementButton" class="feature-card" type="button">更新公告</button>
             </div>
             <button id="skinSettingsButton" type="button" hidden disabled>皮肤设置</button>
@@ -145,7 +146,7 @@
                 <option value="hell-en">地狱英文</option>
                 <option value="hell-zh">地狱无门</option>
                 <option value="beta-ldc-battle">LDC排位赛</option>
-                <option value="roguelike" data-required-flag="alpha-roguelike" hidden>无限折跃</option>
+                <option value="roguelike">矢量跃迁</option>
               </select>
               <span>个人最高分</span> <strong id="bestScore">000000</strong>
             </div>
@@ -514,8 +515,8 @@
     </dialog>
     <dialog id="inputModeDialog" class="input-mode-dialog">
       <div>
-        <div class="input-mode-heading"><div><span class="eyebrow">SELECT MODE</span><h2>选择游戏模式</h2></div><button id="inputModeClose" type="button" aria-label="关闭模式选择">×</button></div>
-        <p>选择本次要进入的游戏模式，确认后立即进入战场。</p>
+        <div class="input-mode-heading"><div><span class="eyebrow">TYPING LADDER</span><h2>打字冲榜</h2></div><button id="inputModeClose" type="button" aria-label="关闭模式选择">×</button></div>
+        <p>经典打字玩法集合，成绩计入排行榜。</p>
         <div class="input-mode-section regular-mode-section"><span class="input-mode-section-title">常规模式</span><div class="input-mode-options" role="group" aria-label="常规游戏模式">
           <button type="button" data-input-mode="en"><span>EN</span><strong>英文单人</strong><small>输入英文单词，保留中文学习释义</small></button>
           <button type="button" data-input-mode="zh"><span>中</span><strong>中文单人</strong><small>输入词语和成语，支持系统输入法与智能联想</small></button>
@@ -523,7 +524,6 @@
           <button id="arenaButton" class="arena-mode-option" type="button" disabled><span>S1</span><strong>竞技对战</strong><small>三分钟实时对战，与对手挑战相同的英文敌机序列</small></button>
           <button id="customModeButton" class="custom-mode-option" type="button"><span>LAB</span><strong>自定义游戏</strong><small>导入本地词库，自选单人或双人房间，不计入排行榜</small></button>
           <button id="ldcBattleButton" class="ldc-mode-option" type="button" data-input-mode="beta-ldc-battle" data-required-flag="beta-ldc-battle" hidden><span>BETA</span><strong>LDC排位赛</strong><small>每张50 LDC · 英文排位 · 每天最多参加5次 · 最多购买5张门票</small></button>
-          <button id="roguelikeModeButton" class="roguelike-mode-option" type="button" data-input-mode="roguelike" data-required-flag="alpha-roguelike" hidden><span>ALPHA</span><strong>无限折跃</strong><small>节点图远征 · 规划分支航线 · 文字破盾与弹幕战斗</small></button>
         </div></div>
         <section class="input-mode-section hell-mode-section" aria-labelledby="hellModeTitle"><div class="hell-mode-heading"><span class="input-mode-section-title" id="hellModeTitle">地狱模式 · 15 关</span><span id="hellModeWarning" class="hell-warning">高难度 · 每个模式每日 10 次</span></div><div class="input-mode-options" role="group" aria-label="地狱游戏模式">
           <button class="hell-mode-option locked" type="button" data-input-mode="hell-en" data-unlocked="false" aria-disabled="true"><span>HELL<br>EN</span><strong>地狱英文</strong><small>大学学术词库 · 锁定后整词模糊，考验瞬时记忆<i class="hell-lock-state" data-hell-unlock="hell-en">已封印 · 普通英文完成 10 关解锁</i><b data-hell-attempts="hell-en">今日已挑战 0/10 · 剩余 10 次</b></small></button>
