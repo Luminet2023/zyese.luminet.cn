@@ -21,9 +21,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-CdRhudkV.js"></script>
+    <script type="module" crossorigin src="/assets/game-DqsiQn5m.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-CCnUTWTf.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-xgERW4bl.css">
+    <link rel="stylesheet" crossorigin href="/assets/game-Bi-UOFJP.css">
   </head>
   <body>
     <main class="app-shell">
@@ -132,7 +132,6 @@
             <div class="menu-feature-cards">
               <button id="gameGuideButton" class="feature-card" type="button">游戏说明</button>
               <button id="storyArchiveButton" class="feature-card" type="button" disabled>剧情档案<small class="feature-card-lock-hint" data-lock="auth">登录后解锁</small></button>
-              <button id="flightSummaryButton" class="feature-card" type="button" disabled>起飞总结<small class="feature-card-lock-hint" data-lock="auth">登录后解锁</small></button>
               <button id="bossDesignButton" class="feature-card boss-design-entry" type="button" disabled>玩家 BOSS 设计工坊<small class="feature-card-lock-hint" data-lock="planned">即将开放</small></button>
               <button id="updateAnnouncementButton" class="feature-card" type="button">更新公告</button>
             </div>
@@ -529,6 +528,9 @@
           <button class="hell-mode-option locked" type="button" data-input-mode="hell-en" data-unlocked="false" aria-disabled="true"><span>HELL<br>EN</span><strong>地狱英文</strong><small>大学学术词库 · 锁定后整词模糊，考验瞬时记忆<i class="hell-lock-state" data-hell-unlock="hell-en">已封印 · 普通英文完成 10 关解锁</i><b data-hell-attempts="hell-en">今日已挑战 0/10 · 剩余 10 次</b></small></button>
           <button class="hell-mode-option locked" type="button" data-input-mode="hell-zh" data-unlocked="false" aria-disabled="true"><span>HELL<br>中</span><strong>地狱无门</strong><small>繁体生僻字与叠字组合 · 带声调拼音 · 按画面字形输入<i class="hell-input-tip">建议使用U模式拆字输入或者五笔输入法，纯拼音和嘴遁选手建议不要为难自己</i><i class="hell-lock-state" data-hell-unlock="hell-zh">已封印 · 普通中文完成 10 关解锁</i><b data-hell-attempts="hell-zh">今日已挑战 0/10 · 剩余 10 次</b></small></button>
         </div><p id="hellModeFootnote" class="input-mode-footnote">先在对应普通模式完整通过 10 关（累计至少 80 击毁）才能解除封印。地狱模式每击毁 8 个目标升一关；完成第 15 关的第 8 个击毁（累计 120 个）后由服务器判定通关，不会生成第 16 关。挑战次数按玩家和模式分别计算，北京时间每日 00:00 重置。</p></section>
+        <section class="input-mode-section ladder-tools-section" aria-labelledby="ladderToolsTitle"><span class="input-mode-section-title" id="ladderToolsTitle">战绩工具</span><div class="input-mode-options" role="group" aria-label="战绩工具">
+          <button id="flightSummaryButton" class="flight-summary-option" type="button" disabled><span>LOG</span><strong>起飞总结</strong><small>个人历史战绩与统计，登录后可查看</small></button>
+        </div></section>
         <p id="inputModeStatus" class="input-mode-status" aria-live="polite"></p>
       </div>
     </dialog>
