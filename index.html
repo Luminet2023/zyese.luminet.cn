@@ -19,9 +19,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-CimYCPcn.js"></script>
+    <script type="module" crossorigin src="/assets/game-BZ65pQoN.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-CPIlDOZf.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-D6F2yJo_.css">
+    <link rel="stylesheet" crossorigin href="/assets/game-N-p2YgUC.css">
   </head>
   <body>
     <main class="app-shell">
@@ -122,7 +122,7 @@
               <div class="rl-hub-groups">
                 <button type="button" data-rl-group="deploy" data-rl-tab="deploy" class="active">出击</button>
                 <button type="button" data-rl-group="growth">养成</button>
-                <button type="button" data-rl-group="supply" data-rl-tab="store">补给</button>
+                <button type="button" data-rl-group="supply" data-rl-tab="store">商城</button>
                 <button type="button" data-rl-group="inventory" data-rl-tab="inventory">仓库</button>
                 <button type="button" data-rl-group="archive">档案</button>
               </div>
@@ -212,7 +212,11 @@
               <div class="rl-equipment-grid" data-rl-equipment></div>
             </section>
             <section class="rl-hub-panel" data-rl-panel="store" hidden>
-              <div class="rl-growth-intro"><strong>跃迁商城 · 装备批次</strong><p>使用母舰星币购买装备；强化消耗母舰星币与对应品质材料。装备购买后可在“装备”页切换上阵。先用战机等级与天赋稳定通过首个 Boss，再扩展装备收藏。</p></div>
+              <div class="rl-growth-intro"><strong>跃迁商城</strong><p>限时商品每日北京时间 04:00 刷新；常规商品仅提供前两级品质装备。购买后会加入仓库，可重复购买。</p></div>
+              <div class="rl-store-tabs" role="tablist" aria-label="商城分类">
+                <button type="button" class="active" data-rl-store-filter="limited">限时</button>
+                <button type="button" data-rl-store-filter="regular">常规</button>
+              </div>
               <div class="rl-store-grid" data-rl-store></div>
             </section>
             <section class="rl-hub-panel" data-rl-panel="inventory" hidden>
