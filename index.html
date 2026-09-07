@@ -21,9 +21,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-CXI7ZY8H.js"></script>
+    <script type="module" crossorigin src="/assets/game-C-NhoHZG.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-CPIlDOZf.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-C5UtzOwi.css">
+    <link rel="stylesheet" crossorigin href="/assets/game-DPDIECVn.css">
   </head>
   <body>
     <main class="app-shell">
@@ -122,6 +122,10 @@
                 <button type="button" data-rl-tab="hangar">战机</button>
                 <button type="button" data-rl-tab="equipment">装备</button>
               </div>
+              <div class="rl-hub-subtabs" data-rl-subtabs="supply" hidden>
+                <button type="button" data-rl-tab="store">商城</button>
+                <button type="button" data-rl-tab="inventory">仓库</button>
+              </div>
               <div class="rl-hub-subtabs" data-rl-subtabs="archive" hidden>
                 <button type="button" data-rl-tab="codex">图鉴</button>
                 <button type="button" data-rl-tab="history">战绩</button>
@@ -205,6 +209,20 @@
             <section class="rl-hub-panel" data-rl-panel="store" hidden>
               <div class="rl-growth-intro"><strong>跃迁商城 · 装备批次</strong><p>使用母舰星币购买装备；强化消耗母舰星币与对应品质材料。装备购买后可在“装备”页切换上阵。先用战机等级与天赋稳定通过首个 Boss，再扩展装备收藏。</p></div>
               <div class="rl-store-grid" data-rl-store></div>
+            </section>
+            <section class="rl-hub-panel" data-rl-panel="inventory" hidden>
+              <div class="rl-growth-intro"><strong>母舰仓库</strong><p>只保存跃迁模式的局外资产。道具、材料与碎片可以叠加；装备为单件独占，不会同时装备在多架战机上。</p></div>
+              <div class="rl-inventory-toolbar">
+                <div class="rl-inventory-filters" role="tablist" aria-label="仓库分类">
+                  <button type="button" class="active" data-rl-inventory-filter="all">全部</button>
+                  <button type="button" data-rl-inventory-filter="item">道具</button>
+                  <button type="button" data-rl-inventory-filter="material">材料</button>
+                  <button type="button" data-rl-inventory-filter="fragment">碎片</button>
+                  <button type="button" data-rl-inventory-filter="equipment">装备</button>
+                </div>
+                <span class="rl-inventory-count" data-rl-inventory-count>0 项</span>
+              </div>
+              <div class="rl-inventory-grid" data-rl-inventory></div>
             </section>
             <section class="rl-hub-panel" data-rl-panel="codex" hidden>
               <div class="rl-codex-grid" data-rl-codex></div>
