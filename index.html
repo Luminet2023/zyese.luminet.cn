@@ -19,9 +19,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-B-kr1VKX.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-dqu-ZzU-.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-B-q0on1o.css">
+    <script type="module" crossorigin src="/assets/game-DkQsi6zB.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-BJ7nPz60.js">
+    <link rel="stylesheet" crossorigin href="/assets/game-z-aSBdKq.css">
   </head>
   <body>
     <main class="app-shell">
@@ -95,7 +95,30 @@
             <p id="connectionNotice" class="connection-notice" hidden></p>
           </section>
           <div class="home-hero-deck">
-          <section class="home-hangar-panel" aria-label="机库展示"><div class="hangar-showcase" id="hangarShowcase" role="button" tabindex="0" title="点击打开机库与皮肤设置"><div class="hangar-ship-frame"><img id="hangarShipImage" src="/assets/ships/player-a-silver-blue-256.webp" alt="当前战机" class="hangar-ship-img" /></div><div class="hangar-ship-meta"><span id="hangarShipRarity" class="hangar-ship-rarity">标准战机</span><strong id="hangarShipName" class="hangar-ship-name">夜空号</strong><span class="hangar-ship-action">点击机库整备 ▸</span></div></div></section>
+          <section class="home-hangar-panel" aria-label="机库展示">
+            <div class="hangar-showcase" id="hangarShowcase" role="button" tabindex="0" title="点击打开机库与皮肤设置">
+              <div class="hangar-stage-slide" id="hangarStageSlide" data-theme="blue">
+                <div class="hangar-stage-bloom" aria-hidden="true"></div>
+                <svg class="hangar-stage-rings" viewBox="0 0 240 240" aria-hidden="true">
+                  <g class="ring-a"><ellipse cx="120" cy="120" rx="104" ry="45" fill="none" stroke="#eafcff" stroke-width="2" stroke-dasharray="0.1 9" stroke-linecap="round" opacity=".95"/></g>
+                  <g class="ring-b"><ellipse cx="120" cy="120" rx="55" ry="112" fill="none" stroke="#d8f6ff" stroke-width="1.6" stroke-dasharray="0.1 7" stroke-linecap="round" opacity=".7"/></g>
+                  <g class="ring-c"><ellipse cx="120" cy="120" rx="120" ry="58" fill="none" stroke="#9fe4f6" stroke-width="1.2" stroke-dasharray="0.1 12" stroke-linecap="round" opacity=".4"/></g>
+                </svg>
+                <canvas id="hangarShowcaseCanvas" class="hangar-showcase-canvas" aria-hidden="true"></canvas>
+                <img id="hangarShipImage" src="/assets/ships/player-a-silver-blue-256.webp" alt="当前战机" class="hangar-ship-img" />
+              </div>
+              <div class="hangar-ship-meta">
+                <div class="hangar-ship-badge-row">
+                  <span id="hangarShipRarity" class="hangar-ship-rarity">标准战机</span>
+                  <span class="hangar-ship-status">状态 · 巡航</span>
+                </div>
+                <div class="hangar-ship-info-row">
+                  <strong id="hangarShipName" class="hangar-ship-name">夜空号</strong>
+                  <span class="hangar-ship-action">点击机库整备 ▸</span>
+                </div>
+              </div>
+            </div>
+          </section>
           <section class="home-mode-deck" aria-label="模式选择"><h2 class="home-mode-deck-title">模式选择</h2><div class="home-mode-grid"><button type="button" class="mode-card" data-lobby-mode="en"><strong>英文单人</strong><small>单词 + 中文释义</small></button><button type="button" class="mode-card" data-lobby-mode="zh"><strong>中文单人</strong><small>词语与成语 · 支持输入法</small></button><button type="button" class="mode-card" data-lobby-mode="ja"><strong>日语单人</strong><small>罗马字打字</small></button><button type="button" class="mode-card locked" data-lobby-mode="hell-en" data-lobby-hell="hell-en" data-unlocked="false" aria-disabled="true"><strong>地狱英文</strong><small data-lobby-hell-hint="hell-en">已封印 · 普通英文完成 0/10 关</small></button><button type="button" class="mode-card locked" data-lobby-mode="hell-zh" data-lobby-hell="hell-zh" data-unlocked="false" aria-disabled="true"><strong>地狱无门</strong><small data-lobby-hell-hint="hell-zh">已封印 · 普通中文完成 0/10 关</small></button><button type="button" class="mode-card" id="lobbyCustomButton"><strong>自定义游戏</strong><small>导入本地词库 · 不计榜</small></button><button type="button" class="mode-card" id="lobbyArenaButton" disabled><strong>竞技对战</strong><small>三分钟实时对战</small></button><button type="button" class="mode-card" id="lobbyLdcButton" data-required-flag="beta-ldc-battle" hidden><strong>LDC 排位赛</strong><small>每张 50 LDC · 每日 5 次</small></button></div><p id="modeDeckStatus" class="home-mode-status" aria-live="polite"></p></section>
           </div>
           <aside class="home-signal-rail" aria-label="个人战绩"><div class="home-signal-heading"><span>个人战绩</span></div><div class="home-signal-best"><strong id="bestScore">000000</strong><span>个人最高分</span></div><label class="home-signal-mode"><span>模式</span><select id="bestScoreModeSelect" class="best-score-mode-select" aria-label="选择个人最高分模式"><option value="en">英文单人</option><option value="zh">中文单人</option><option value="ja">日语单人</option><option value="hell-en">地狱英文</option><option value="hell-zh">地狱无门</option><option value="beta-ldc-battle">LDC排位赛</option><option value="roguelike">矢量跃迁</option></select></label><div class="home-signal-readout"><span>最高连击</span><strong id="homeSignalStreak">—</strong></div><div class="home-signal-readout"><span>最佳准确率</span><strong id="homeSignalAccuracy">—</strong></div><div class="home-signal-readout"><span>最高波次</span><strong id="homeSignalWave">—</strong></div><button type="button" class="home-signal-tool" id="lobbyFlightSummaryButton" disabled><strong>起飞总结</strong><small>个人历史战绩与统计 · 登录后可查看</small></button></aside>
