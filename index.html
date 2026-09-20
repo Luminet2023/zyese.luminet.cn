@@ -19,11 +19,69 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-AQ366Wnt.js"></script>
+    <script type="module" crossorigin src="/assets/game-CPHJYtT0.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-BJ7nPz60.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-B9fXPPV-.css">
+    <link rel="stylesheet" crossorigin href="/assets/game-CtRrrWSF.css">
   </head>
   <body>
+    <div id="gameIntroScreen" class="game-intro-screen" aria-label="游戏开始界面" hidden>
+      <div class="intro-bg-flash" aria-hidden="true"></div>
+      <div class="intro-backdrop-grid" aria-hidden="true"></div>
+      <div class="intro-content">
+        <div class="intro-title-wrap">
+          <svg class="intro-lightning-svg" viewBox="0 0 520 220" aria-hidden="true" focusable="false">
+            <defs>
+              <filter id="intro-glow-cyan" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="4" result="blur1" />
+                <feGaussianBlur stdDeviation="12" result="blur2" />
+                <feMerge>
+                  <feMergeNode in="blur2" />
+                  <feMergeNode in="blur1" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="intro-glow-red" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="5" result="blur1" />
+                <feGaussianBlur stdDeviation="16" result="blur2" />
+                <feMerge>
+                  <feMergeNode in="blur2" />
+                  <feMergeNode in="blur1" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <ellipse class="intro-plasma-halo" cx="260" cy="110" rx="210" ry="75" />
+            <path class="intro-arc intro-arc-red-a" d="M30 110L78 68L130 82L190 48L252 64L312 36L372 58L428 34L480 66L450 128L495 158L432 166L378 190L318 170L260 192L204 168L150 186L104 154L52 162L30 110Z" />
+            <path class="intro-arc intro-arc-red-b" d="M54 148L108 114L144 132L196 86L246 106L298 68L348 96L398 76L432 116L482 124L454 154L388 164L334 146L278 174L224 148L174 166L126 138L86 148Z" />
+            <path class="intro-arc intro-arc-cyan-a" d="M22 104L72 72L122 82L176 50L230 68L286 38L342 60L396 36L444 66L500 94L460 126L506 154L440 162L384 184L328 164L272 186L218 162L164 180L118 148L66 156L22 104Z" />
+            <path class="intro-arc intro-arc-cyan-b" d="M50 142L102 110L138 126L188 82L236 102L286 64L334 92L382 72L414 110L468 118L440 148L374 158L322 140L268 168L214 142L166 160L120 132L80 142Z" />
+            <path class="intro-bolt-core intro-bolt-core-top" d="M20 100L90 60L160 74L230 42L300 62L370 38L440 68L500 105" />
+            <path class="intro-bolt-core intro-bolt-core-mid" d="M15 112L85 110L155 118L235 104L315 116L395 106L465 114L505 112" />
+            <path class="intro-bolt-core intro-bolt-core-bot" d="M30 125L95 160L170 145L245 178L320 152L395 174L460 148L495 125" />
+            <path class="intro-branch intro-branch-1" d="M90 60L72 32L54 38" />
+            <path class="intro-branch intro-branch-2" d="M370 38L388 16L412 18" />
+            <path class="intro-branch intro-branch-3" d="M170 145L154 182L132 190" />
+            <path class="intro-branch intro-branch-4" d="M395 174L420 202L446 196" />
+            <path class="intro-branch intro-branch-5" d="M20 100L2 85" />
+            <path class="intro-branch intro-branch-6" d="M500 105L518 120" />
+          </svg>
+          <h1 class="intro-hero-title" data-text="Zyese">Zyese</h1>
+          <span class="intro-rift intro-rift-a" aria-hidden="true"></span>
+          <span class="intro-rift intro-rift-b" aria-hidden="true"></span>
+        </div>
+        <div class="intro-action-wrap">
+          <button id="introStartBtn" class="intro-start-btn" type="button" aria-label="点击开始游戏">
+            <span class="intro-start-border" aria-hidden="true"></span>
+            <span class="intro-start-glow" aria-hidden="true"></span>
+            <span class="intro-start-scan" aria-hidden="true"></span>
+            <span class="intro-start-bracket bracket-left" aria-hidden="true">[</span>
+            <span class="intro-start-label">CLICK TO START</span>
+            <span class="intro-start-bracket bracket-right" aria-hidden="true">]</span>
+          </button>
+          <span class="intro-hint-text">按下任意键或点击屏幕接入母舰</span>
+        </div>
+      </div>
+    </div>
     <main class="app-shell">
       <section class="game-frame" aria-label="Zyese 打字射击游戏">
         <header class="topbar">
