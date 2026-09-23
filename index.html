@@ -19,9 +19,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-DZWH3vw5.js"></script>
+    <script type="module" crossorigin src="/assets/game-Csl8Zwrg.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-BJ7nPz60.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-DjfjMTRS.css">
+    <link rel="stylesheet" crossorigin href="/assets/game-Ciwxq7Jc.css">
   </head>
   <body>
     <div id="gameIntroScreen" class="game-intro-screen" aria-label="游戏开始界面" hidden>
@@ -214,52 +214,77 @@
             </nav>
             <section class="rl-hub-panel" data-rl-panel="deploy">
               <div class="rl-deploy-deck">
+                <div class="rl-deploy-scene" aria-hidden="true">
+                  <span class="rl-scene-nebula"></span>
+                  <span class="rl-scene-stars"></span>
+                  <span class="rl-scene-stars rl-scene-stars-far"></span>
+                  <span class="rl-scene-horizon"></span>
+                  <span class="rl-scene-deck"></span>
+                  <span class="rl-scene-rails"></span>
+                  <span class="rl-scene-bloom"></span>
+                </div>
                 <nav class="rl-step-nav" data-rl-step-nav aria-label="出击流程">
-                  <button type="button" class="active" data-rl-step-target="recommend">推荐行动</button>
-                  <button type="button" data-rl-step-target="configure">配置阵容</button>
-                  <button type="button" data-rl-step-target="launch">出击确认</button>
+                  <button type="button" class="active" data-rl-step-target="recommend"><em>01</em><span>推荐行动</span><i>航线</i></button>
+                  <button type="button" data-rl-step-target="configure"><em>02</em><span>配置阵容</span><i>编成</i></button>
+                  <button type="button" data-rl-step-target="launch"><em>03</em><span>出击确认</span><i>点火</i></button>
                 </nav>
-                <div class="rl-deploy-step" data-rl-step="recommend">
+                <div class="rl-launch-bay">
+                  <div class="rl-bay-chrome" aria-hidden="true">
+                    <span class="rl-bay-tag">起飞甲板 · 03</span>
+                    <span class="rl-bay-cross"></span>
+                    <span class="rl-bay-ruler"></span>
+                  </div>
+                  <div class="rl-bay-status"></div>
                   <div class="rl-deploy-hero" data-rl-deploy-hero></div>
-                  <div class="rl-recommend-card" data-rl-recommend></div>
                   <div class="rl-save-card" data-rl-save hidden></div>
                 </div>
-                <div class="rl-deploy-step" data-rl-step="configure" hidden>
-                  <section class="rl-driver-section" aria-label="驾驶员选择">
-                    <div class="rl-driver-heading">
-                      <div><span>阵容配置</span><strong>驾驶员</strong></div>
-                      <small>无品质差异 · 记忆体碎片解锁 · 等级上限 10 · 专属技能只在对应战机触发</small>
+                <div class="rl-deploy-hud">
+                  <div class="rl-deploy-step" data-rl-step="recommend">
+                    <div class="rl-recommend-card" data-rl-recommend></div>
+                  </div>
+                  <div class="rl-deploy-step" data-rl-step="configure" hidden>
+                    <section class="rl-driver-section" aria-label="驾驶员选择">
+                      <div class="rl-driver-heading">
+                        <div><span>阵容配置</span><strong>驾驶员</strong></div>
+                        <small>无品质差异 · 记忆体碎片解锁 · 等级上限 10 · 专属技能只在对应战机触发</small>
+                      </div>
+                      <div class="rl-memory-wallet" data-rl-memory-wallet></div>
+                      <div class="rl-driver-grid" data-rl-drivers></div>
+                    </section>
+                    <div class="rl-domain-heading">
+                      <div><span>折跃目的地</span><strong>选择星域</strong></div>
+                      <small>每个有限星域 35 个房间 · 每 5 个房间迎战区域 Boss</small>
                     </div>
-                    <div class="rl-memory-wallet" data-rl-memory-wallet></div>
-                    <div class="rl-driver-grid" data-rl-drivers></div>
-                  </section>
-                  <div class="rl-domain-heading">
-                    <div><span>折跃目的地</span><strong>选择星域</strong></div>
-                    <small>每个有限星域 35 个房间 · 每 5 个房间迎战区域 Boss</small>
+                    <div class="rl-domain-grid" data-rl-domains></div>
                   </div>
-                  <div class="rl-domain-grid" data-rl-domains></div>
-                </div>
-                <div class="rl-deploy-step" data-rl-step="launch" hidden>
-                  <div class="rl-stat-grid">
-                    <div><span>最高房间</span><strong data-rl-stat="wave">0</strong></div>
-                    <div><span>最高星域</span><strong data-rl-stat="sector">0</strong></div>
-                    <div><span>最高得分</span><strong data-rl-stat="score">0</strong></div>
-                    <div><span>远征场次</span><strong data-rl-stat="runs">0</strong></div>
-                    <div><span>开局生命</span><strong data-rl-stat="hp">30</strong></div>
-                    <div><span>能量上限</span><strong data-rl-stat="energy">100.00</strong></div>
-                    <div><span>开局重抽</span><strong data-rl-stat="rerolls">0</strong></div>
+                  <div class="rl-deploy-step" data-rl-step="launch" hidden>
+                    <div class="rl-hud-head">
+                      <span>最终检查 · 点火前</span>
+                      <strong class="rl-launch-target">未选定星域</strong>
+                      <small>确认机体、驾驶员与航线后点火；远征途中可随时存档退出。</small>
+                    </div>
+                    <div class="rl-stat-grid">
+                      <div><span>最高房间</span><strong data-rl-stat="wave">0</strong></div>
+                      <div><span>最高星域</span><strong data-rl-stat="sector">0</strong></div>
+                      <div><span>最高得分</span><strong data-rl-stat="score">0</strong></div>
+                      <div><span>远征场次</span><strong data-rl-stat="runs">0</strong></div>
+                      <div><span>开局生命</span><strong data-rl-stat="hp">30</strong></div>
+                      <div><span>能量上限</span><strong data-rl-stat="energy">100.00</strong></div>
+                      <div><span>开局重抽</span><strong data-rl-stat="rerolls">0</strong></div>
+                    </div>
+                    <details class="rl-deploy-brief">
+                      <summary>远征规则</summary>
+                      <ul class="rl-brief-bullets">
+                        <li>每个区域 5 层节点：前 4 层选择航线，第 5 层迎战 Boss。</li>
+                        <li>战斗、精英、维修、商店、事件节点各有收益；已完成的节点不再给奖励。</li>
+                        <li>每区域可消耗 1 个跃迁燃料，返回最近的分叉改道。</li>
+                        <li>第一至第三星域各 35 个房间，无尽星域不设终点。</li>
+                      </ul>
+                    </details>
                   </div>
-                  <details class="rl-deploy-brief">
-                    <summary>远征规则</summary>
-                    <ul class="rl-brief-bullets">
-                      <li>每个区域 5 层节点：前 4 层选择航线，第 5 层迎战 Boss。</li>
-                      <li>战斗、精英、维修、商店、事件节点各有收益；已完成的节点不再给奖励。</li>
-                      <li>每区域可消耗 1 个跃迁燃料，返回最近的分叉改道。</li>
-                      <li>第一至第三星域各 35 个房间，无尽星域不设终点。</li>
-                    </ul>
-                  </details>
                 </div>
                 <div class="rl-deploy-actions">
+                  <span class="rl-console-readout" aria-hidden="true"><i></i><b class="rl-console-state">就绪</b><small class="rl-console-hint">发射序列已装载</small></span>
                   <button type="button" class="rl-primary rl-launch" data-rl-deploy>跃迁开始</button>
                   <button type="button" class="rl-primary rl-launch" data-rl-continue hidden>继续</button>
                   <button type="button" class="rl-danger" data-rl-restart hidden>重新开始</button>
