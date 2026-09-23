@@ -19,9 +19,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-Csl8Zwrg.js"></script>
+    <script type="module" crossorigin src="/assets/game-CK7CASxg.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-BJ7nPz60.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-Ciwxq7Jc.css">
+    <link rel="stylesheet" crossorigin href="/assets/game-BYwENuSJ.css">
   </head>
   <body>
     <div id="gameIntroScreen" class="game-intro-screen" aria-label="游戏开始界面" hidden>
@@ -299,17 +299,35 @@
               </div>
             </section>
             <section class="rl-hub-panel" data-rl-panel="hangar" hidden>
-              <div class="rl-growth-intro">
-                <strong>战机强化 / Lv.1–70 · 六阶进阶</strong>
-                <ol class="rl-progression-steps">
-                  <li><strong>1：</strong><span>Lv.1–50 强化攻击、防御与能量上限；Lv.50 消耗星核完成觉醒。</span></li>
-                  <li><strong>2：</strong><span>觉醒后进入 Lv.51–70，继续强化攻击与能量，并逐步开放射速、移动速度和暴击率。</span></li>
-                  <li><strong>3：</strong><span>夜空号需要先解锁驾驶员 ???；魔法少女号与露米号没有此限制。</span></li>
-                  <li><strong>4：</strong><span>每架战机另有六阶进阶星轨；魔法少女号偏防御与能量，露米号偏火力与机动。</span></li>
-                </ol>
+              <div class="rl-hangar-deck">
+                <div class="rl-deploy-scene rl-hangar-scene" aria-hidden="true">
+                  <span class="rl-scene-nebula"></span>
+                  <span class="rl-scene-stars"></span>
+                  <span class="rl-scene-stars rl-scene-stars-far"></span>
+                  <span class="rl-scene-horizon"></span>
+                  <span class="rl-scene-deck"></span>
+                  <span class="rl-scene-rails"></span>
+                  <span class="rl-scene-bloom"></span>
+                </div>
+                <nav class="rl-step-nav rl-ship-nav" data-rl-ship-nav aria-label="战机选择">
+                  <button type="button" class="active" data-rl-ship-target="default"><em>01</em><span>夜空号</span><i>均衡型</i></button>
+                  <button type="button" data-rl-ship-target="fufu"><em>02</em><span>魔法少女号</span><i>防御型</i></button>
+                  <button type="button" data-rl-ship-target="lumi"><em>03</em><span>露米号</span><i>机动型</i></button>
+                </nav>
+                <div class="rl-hangar-main">
+                  <div class="rl-growth-intro">
+                    <strong>战机强化 / Lv.1–70 · 六阶进阶</strong>
+                    <ol class="rl-progression-steps">
+                      <li><strong>1：</strong><span>Lv.1–50 强化攻击、防御与能量上限；Lv.50 消耗星核完成觉醒。</span></li>
+                      <li><strong>2：</strong><span>觉醒后进入 Lv.51–70，继续强化攻击与能量，并逐步开放射速、移动速度和暴击率。</span></li>
+                      <li><strong>3：</strong><span>夜空号需要先解锁驾驶员 ???；魔法少女号与露米号没有此限制。</span></li>
+                      <li><strong>4：</strong><span>每架战机另有六阶进阶星轨；魔法少女号偏防御与能量，露米号偏火力与机动。</span></li>
+                    </ol>
+                  </div>
+                  <div class="rl-material-grid" data-rl-materials></div>
+                  <div class="rl-ship-grid" data-rl-ships></div>
+                </div>
               </div>
-              <div class="rl-material-grid" data-rl-materials></div>
-              <div class="rl-ship-grid" data-rl-ships></div>
             </section>
             <section class="rl-hub-panel" data-rl-panel="equipment" hidden>
               <div class="rl-growth-intro">
