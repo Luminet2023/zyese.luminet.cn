@@ -19,9 +19,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-itGSFgvU.js"></script>
+    <script type="module" crossorigin src="/assets/game-B5BnTAJ0.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-BJ7nPz60.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-D7vvRikM.css">
+    <link rel="stylesheet" crossorigin href="/assets/game-NTzUmVnt.css">
   </head>
   <body>
     <div id="gameIntroScreen" class="game-intro-screen" aria-label="游戏开始界面" hidden>
@@ -330,14 +330,35 @@
               </div>
             </section>
             <section class="rl-hub-panel" data-rl-panel="equipment" hidden>
-              <div class="rl-growth-intro">
-                <div class="rl-equipment-heading">
-                  <strong>远征装备 · 四槽位</strong>
-                  <span class="rl-equipment-owner" data-rl-equipment-owner>当前装配：夜空号</span>
+              <div class="rl-equipment-deck">
+                <div class="rl-deploy-scene rl-equipment-scene" aria-hidden="true">
+                  <span class="rl-scene-nebula"></span>
+                  <span class="rl-scene-stars"></span>
+                  <span class="rl-scene-stars rl-scene-stars-far"></span>
+                  <span class="rl-scene-horizon"></span>
+                  <span class="rl-scene-deck"></span>
+                  <span class="rl-scene-rails"></span>
+                  <span class="rl-scene-bloom"></span>
                 </div>
-                <p>品质依次为废品（白）、量产（绿 · 双线边框）、星空（蓝 · 发光边框）、不朽（金 · 华丽双边框）；对应强化上限为 +5 / +10 / +15 / +20。引擎加能量上限与耗能减免、装甲加生命与防御、武器加攻击与射速、C 装置加暴击与结算加成，强化提升词缀数值。</p>
+                <nav class="rl-step-nav rl-ship-nav rl-equipment-ship-nav" aria-label="装备战机选择">
+                  <button type="button" class="active" data-ship-target="default"><em>01</em><span>夜空号</span><i>均衡型</i></button>
+                  <button type="button" data-ship-target="fufu"><em>02</em><span>魔法少女号</span><i>防御型</i></button>
+                  <button type="button" data-ship-target="lumi"><em>03</em><span>露米号</span><i>机动型</i></button>
+                </nav>
+                <div class="rl-equipment-main">
+                  <div class="rl-growth-intro rl-equipment-intro">
+                    <div class="rl-equipment-heading">
+                      <strong>远征装备 · 四槽位</strong>
+                      <span class="rl-equipment-owner" data-rl-equipment-owner>当前装配：夜空号</span>
+                    </div>
+                    <p>品质依次为废品（白）、量产（绿 · 双线边框）、星空（蓝 · 发光边框）、不朽（金 · 华丽双边框）；对应强化上限为 +5 / +10 / +15 / +20。引擎加能量上限与耗能减免、装甲加生命与防御、武器加攻击与射速、C 装置加暴击与结算加成，强化提升词缀数值。</p>
+                  </div>
+                  <div class="rl-equipment-body-area">
+                    <div class="rl-equipment-summary"></div>
+                    <div class="rl-equipment-grid" data-rl-equipment></div>
+                  </div>
+                </div>
               </div>
-              <div class="rl-equipment-grid" data-rl-equipment></div>
             </section>
             <section class="rl-hub-panel" data-rl-panel="store" hidden>
               <div class="rl-growth-intro"><strong>跃迁商城</strong><p>限时商品每日北京时间 04:00 刷新；常规商品仅提供前两级品质装备。购买后会加入仓库，可重复购买。</p></div>
