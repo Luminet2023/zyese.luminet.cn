@@ -19,9 +19,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-tNX_hxd1.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-DVZ-4NGZ.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-DzEnJ8O0.css">
+    <script type="module" crossorigin src="/assets/game-CnMed6f7.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-DfJcbCw2.js">
+    <link rel="stylesheet" crossorigin href="/assets/game-DcB1VTTc.css">
   </head>
   <body>
     <div id="gameIntroScreen" class="game-intro-screen" aria-label="游戏开始界面" hidden>
@@ -390,6 +390,10 @@
               <div class="rl-history-list" data-rl-history></div>
             </section>
             <section class="rl-hub-panel" data-rl-panel="rank" hidden>
+              <div class="rl-rank-tabs" data-rl-rank-tabs>
+                <button type="button" class="rl-rank-tab active" data-rl-rank-tab="standard">远征总榜</button>
+                <button type="button" class="rl-rank-tab" data-rl-rank-tab="endless">无尽挑战榜</button>
+              </div>
               <div class="rl-rank-list" data-rl-ranks></div>
             </section>
             <p class="rl-hub-status" data-rl-status></p>
@@ -518,6 +522,7 @@
                 <section class="leaderboard-group"><span>常规</span><div><button class="tab-button active" type="button" data-board="daily" role="tab" aria-selected="true">英文今日</button><button class="tab-button" type="button" data-board="all-time" role="tab" aria-selected="false">英文总榜</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-daily" role="tab" aria-selected="false">中文今日</button><button class="tab-button chinese-tab-button" type="button" data-board="zh-all-time" role="tab" aria-selected="false">中文总榜</button><button class="tab-button japanese-tab-button" type="button" data-board="ja-daily" role="tab" aria-selected="false">日语今日</button><button class="tab-button japanese-tab-button" type="button" data-board="ja-all-time" role="tab" aria-selected="false">日语总榜</button></div></section>
                 <section class="leaderboard-group leaderboard-hell-group"><span>地狱</span><div><button class="tab-button hell-tab-button" type="button" data-board="hell-en-daily" role="tab" aria-selected="false">地狱英文今日</button><button class="tab-button hell-tab-button" type="button" data-board="hell-en-all-time" role="tab" aria-selected="false">地狱英文总榜</button><button class="tab-button hell-tab-button" type="button" data-board="hell-zh-daily" role="tab" aria-selected="false">地狱无门今日</button><button class="tab-button hell-tab-button" type="button" data-board="hell-zh-all-time" role="tab" aria-selected="false">地狱无门总榜</button></div></section>
                 <section class="leaderboard-group leaderboard-arena-group"><span>竞技</span><div><button class="tab-button arena-tab-button" type="button" data-board="arena" role="tab" aria-selected="false">竞技 S1</button></div></section>
+                <section class="leaderboard-group leaderboard-roguelike-group"><span>肉鸽</span><div><button class="tab-button roguelike-tab-button" type="button" data-board="roguelike-endless" role="tab" aria-selected="false">肉鸽无尽</button></div></section>
                 <section class="leaderboard-group leaderboard-ldc-group" data-beta-board data-required-flag="beta-ldc-battle" hidden><span>测试</span><div><button class="tab-button ldc-tab-button" type="button" data-board="ldc-daily" role="tab" aria-selected="false">LDC 日榜</button></div></section>
               </div>
               <div id="leaderboardSelfSignatureBar" class="leaderboard-self-bar" hidden>
