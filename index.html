@@ -19,9 +19,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-efez7dYK.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-DAy-k6lc.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-DcB1VTTc.css">
+    <script type="module" crossorigin src="/assets/game-ZgX63NNS.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-DF6SBMvY.js">
+    <link rel="stylesheet" crossorigin href="/assets/game-YgpbF1ZE.css">
   </head>
   <body>
     <div id="gameIntroScreen" class="game-intro-screen" aria-label="游戏开始界面" hidden>
@@ -327,6 +327,9 @@
                   </div>
                   <div class="rl-material-grid" data-rl-materials></div>
                   <div class="rl-ship-grid" data-rl-ships></div>
+                  <div class="rl-hangar-footer">
+                    <button type="button" class="rl-danger rl-wipe-save" data-rl-wipe-save>重置档案 (0/10)</button>
+                  </div>
                 </div>
               </div>
             </section>
@@ -430,6 +433,33 @@
               <footer class="rl-map-foot">
                 <button type="button" class="rl-ghost" data-rl-map-save>存档并退出</button>
                 <button type="button" class="rl-danger" data-rl-map-settle>立即结算</button>
+              </footer>
+            </div>
+          </div>
+          <div id="roguelikeMegaShopModal" class="rl-mega-shop-modal" role="dialog" aria-modal="true" aria-labelledby="megaShopTitle" hidden>
+            <div class="rl-mega-shop-shell">
+              <header class="rl-mega-shop-head">
+                <div>
+                  <span class="rl-mega-shop-kicker">深空终局整备终端</span>
+                  <h2 id="megaShopTitle">深空协议扩充阵列</h2>
+                  <p class="rl-mega-shop-subtitle">自由点选叠层协议 · 突破极限战力 · 备战无尽星域</p>
+                </div>
+                <div class="rl-mega-shop-wallet">
+                  <div class="rl-mega-shop-wallet-icon"></div>
+                  <span data-mega-shop-credits>算力凭证 0</span>
+                </div>
+              </header>
+              <nav class="rl-mega-shop-tabs">
+                <button type="button" class="rl-mega-shop-tab active" data-mega-shop-tab="all">全部协议</button>
+                <button type="button" class="rl-mega-shop-tab tab-attack" data-mega-shop-tab="attack">攻击 Attack</button>
+                <button type="button" class="rl-mega-shop-tab tab-defense" data-mega-shop-tab="defense">防御 Defense</button>
+                <button type="button" class="rl-mega-shop-tab tab-healing" data-mega-shop-tab="healing">治疗 Healing</button>
+                <button type="button" class="rl-mega-shop-tab tab-tactical" data-mega-shop-tab="tactical">战术 Tactical</button>
+              </nav>
+              <div class="rl-mega-shop-grid" data-mega-shop-items></div>
+              <footer class="rl-mega-shop-foot">
+                <span class="rl-mega-shop-hint">提示：阶梯递增定价，购买即刻提升层数 (Rank)</span>
+                <button type="button" class="rl-mega-shop-leave-btn" data-mega-shop-leave>整备完毕 · 启程前往无尽星域</button>
               </footer>
             </div>
           </div>
