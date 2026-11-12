@@ -19,9 +19,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-BPHaLckT.js"></script>
+    <script type="module" crossorigin src="/assets/game-bgUa96qa.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-C6GXoAP1.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-DLuUvapT.css">
+    <link rel="stylesheet" crossorigin href="/assets/game-BiAyJmvz.css">
   </head>
   <body>
     <div id="gameIntroScreen" class="game-intro-screen" aria-label="游戏开始界面" hidden>
@@ -76,6 +76,99 @@
         <span class="intro-prompt-arrow" aria-hidden="true">◂</span>
       </div>
     </div>
+    <section id="accountRestrictedScreen" class="restricted-screen" aria-label="您的账户已被暂停" hidden>
+      <header class="restricted-topbar">
+        <div class="restricted-brand">
+          <svg class="restricted-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2v20M4.93 4.93l14.14 14.14M2 12h20M4.93 19.07L19.07 4.93"/>
+          </svg>
+          <span>Zyese</span>
+        </div>
+        <button id="restrictedLogoutButton" class="restricted-logout-button" type="button">登出</button>
+      </header>
+      <div class="restricted-main">
+        <div class="restricted-container">
+          <div class="restricted-lock-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="11" width="16" height="10" rx="2"/>
+              <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+              <circle cx="12" cy="15.5" r="1.2"/>
+              <path d="M12 16.7v1.8"/>
+            </svg>
+          </div>
+          <h1 class="restricted-title">您的账户已被暂停</h1>
+          <p class="restricted-lead">由于出现异常活动，我们已暂停您的账户（预计解除时间：<strong id="restrictedBanTime">2026年11月12日 15:50</strong>）。您的对局记录与数据皆安全无虞。</p>
+          <p class="restricted-sublead">如果您认为此项暂停有误，可以申请账户审查。</p>
+          <h2 class="restricted-section-title">接下来会发生什么：</h2>
+          <ol class="restricted-card restricted-steps-card">
+            <li class="restricted-step">
+              <span class="restricted-step-badge" aria-hidden="true">1</span>
+              <div class="restricted-step-body">
+                <strong>请求审核</strong>
+                <span>请告诉我们更多关于所发生情况的细节。</span>
+              </div>
+            </li>
+            <li class="restricted-step">
+              <span class="restricted-step-badge" aria-hidden="true">2</span>
+              <div class="restricted-step-body">
+                <strong>我们将审查您的账户</strong>
+                <span>团队成员将一并审查您的要求与账户活动。</span>
+              </div>
+            </li>
+            <li class="restricted-step">
+              <span class="restricted-step-badge" aria-hidden="true">3</span>
+              <div class="restricted-step-body">
+                <strong>我们将以电子邮件通知您结果</strong>
+                <span>审核大约需要 10 天。</span>
+              </div>
+            </li>
+          </ol>
+          <button class="restricted-primary-button" type="button">请求审核</button>
+          <h2 class="restricted-section-title">您可以执行的操作</h2>
+          <div class="restricted-card restricted-actions-card">
+            <button class="restricted-action-row" type="button">
+              <svg class="restricted-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3v12m0 0l-4-4m4 4l4-4"/>
+                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+              </svg>
+              <span class="restricted-action-text">
+                <strong>导出您的数据</strong>
+                <span>我们会将您的对局记录、战绩与设置打包供您下载。此程序可能需要一些时间才能完成。</span>
+              </span>
+              <svg class="restricted-action-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 6l6 6-6 6"/>
+              </svg>
+            </button>
+            <button class="restricted-action-row restricted-action-danger" type="button">
+              <svg class="restricted-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/>
+                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                <path d="M10 11v6M14 11v6"/>
+              </svg>
+              <span class="restricted-action-text">
+                <strong>删除您的账户</strong>
+                <span>您可以永久删除您的账户和资料。此操作无法恢复。</span>
+              </span>
+              <svg class="restricted-action-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 6l6 6-6 6"/>
+              </svg>
+            </button>
+          </div>
+          <footer class="restricted-footer">
+            <p>请参阅我们的<button type="button" class="restricted-inline-link">服务条款</button>和<button type="button" class="restricted-inline-link">使用政策</button>，了解 Zyese 可用于哪些用途。</p>
+            <div class="restricted-ref">
+              <span>参考编号: <code id="restrictedRefCode">TS-019f2e9e-829b-750a-94e0-9266f08a5fda</code></span>
+              <button type="button" class="restricted-copy-btn" aria-label="复制参考编号" title="复制参考编号">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+              </button>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </section>
     <main class="app-shell">
       <section class="game-frame" aria-label="Zyese 打字射击游戏">
         <header class="topbar">
