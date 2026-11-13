@@ -3,10 +3,10 @@
   "sourceFamily": "Noto Sans SC",
   "sourceUrl": "https://github.com/google/fonts/tree/main/ofl/notosanssc",
   "copyrights": [
-    "© 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
+    "(c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
   ],
   "license": "SIL Open Font License 1.1",
-  "sha256": "26713cccc4576676c0c43a3159728eef8e9214503e9bd7ee71196fda6aa5c72e",
+  "sha256": "d7733ab884f4e63fc938cd707c0e9f85cb9838500f3f41c73b69f314e52d8928",
   "codepoints": [
     15704,
     19968,
@@ -196,6 +196,7 @@
     27863,
     27934,
     27963,
+    27969,
     28053,
     28124,
     28145,
@@ -364,6 +365,7 @@
     33278,
     33288,
     33418,
+    33433,
     33503,
     33521,
     33557,
