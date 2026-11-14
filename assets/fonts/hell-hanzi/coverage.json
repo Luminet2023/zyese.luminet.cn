@@ -6,7 +6,7 @@
     "(c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
   ],
   "license": "SIL Open Font License 1.1",
-  "sha256": "d7733ab884f4e63fc938cd707c0e9f85cb9838500f3f41c73b69f314e52d8928",
+  "sha256": "bb44d216a6bd22a0526567532e9991448301628a31c5c2da6f7360d4d163546c",
   "codepoints": [
     15704,
     19968,
@@ -311,6 +311,7 @@
     31755,
     31776,
     31820,
+    31859,
     31881,
     31903,
     31934,
@@ -540,6 +541,7 @@
     38685,
     38692,
     38704,
+    38706,
     38713,
     38721,
     38722,
