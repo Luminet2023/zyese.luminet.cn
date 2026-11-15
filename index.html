@@ -19,9 +19,9 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-Bd8Mhtud.js"></script>
+    <script type="module" crossorigin src="/assets/game-DP5QRyXF.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-2vsW9xDN.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-DNh1LXAS.css">
+    <link rel="stylesheet" crossorigin href="/assets/game-BauxHpx7.css">
   </head>
   <body>
     <div id="gameIntroScreen" class="game-intro-screen" aria-label="游戏开始界面" hidden>
@@ -265,7 +265,7 @@
               </div>
             </div>
           </section>
-          <section class="home-mode-deck" aria-label="模式选择"><h2 class="home-mode-deck-title">模式选择</h2><div class="home-mode-grid"><button type="button" class="mode-card" data-lobby-mode="en"><strong>英文单人</strong><small>单词 + 中文释义</small></button><button type="button" class="mode-card" data-lobby-mode="zh"><strong>中文单人</strong><small>词语与成语 · 支持输入法</small></button><button type="button" class="mode-card" data-lobby-mode="ja"><strong>日语单人</strong><small>罗马字打字</small></button><button type="button" class="mode-card locked" data-lobby-mode="hell-en" data-lobby-hell="hell-en" data-unlocked="false" aria-disabled="true"><strong>地狱英文</strong><small data-lobby-hell-hint="hell-en">已封印 · 普通英文完成 0/10 关</small></button><button type="button" class="mode-card locked" data-lobby-mode="hell-zh" data-lobby-hell="hell-zh" data-unlocked="false" aria-disabled="true"><strong>地狱无门</strong><small data-lobby-hell-hint="hell-zh">已封印 · 普通中文完成 0/10 关</small></button><button type="button" class="mode-card" id="lobbyCustomButton"><strong>自定义游戏</strong><small>导入本地词库 · 不计榜</small></button><button type="button" class="mode-card" id="lobbyArenaButton" disabled><strong>竞技对战</strong><small>三分钟实时对战</small></button><button type="button" class="mode-card" id="lobbyLdcButton" data-required-flag="beta-ldc-battle" hidden><strong>LDC 排位赛</strong><small>每张 50 LDC · 每日 5 次</small></button></div><p id="modeDeckStatus" class="home-mode-status" aria-live="polite"></p></section>
+          <section class="home-mode-deck" aria-label="模式选择"><h2 class="home-mode-deck-title">模式选择</h2><div class="home-mode-grid"><button type="button" class="mode-card" data-lobby-mode="en"><strong>英文单人</strong><small>单词 + 中文释义</small></button><button type="button" class="mode-card" data-lobby-mode="zh"><strong>中文单人</strong><small>词语与成语 · 支持输入法</small></button><button type="button" class="mode-card" data-lobby-mode="ja"><strong>日语单人</strong><small>罗马字打字</small></button><button type="button" class="mode-card locked" data-lobby-mode="hell-en" data-lobby-hell="hell-en" data-unlocked="false" aria-disabled="true"><strong>地狱英文</strong><small data-lobby-hell-hint="hell-en">已封印 · 普通英文完成 0/10 关</small></button><button type="button" class="mode-card locked" data-lobby-mode="hell-zh" data-lobby-hell="hell-zh" data-unlocked="false" aria-disabled="true"><strong>地狱无门</strong><small data-lobby-hell-hint="hell-zh">已封印 · 普通中文完成 0/10 关</small></button><button type="button" class="mode-card" id="lobbyCustomButton"><strong>自定义游戏</strong><small>导入本地词库 · 不计榜</small></button><button type="button" class="mode-card" id="lobbyArenaButton" disabled><strong>竞技对战</strong><small>三分钟实时对战</small></button><button type="button" class="mode-card" id="lobbyLdcButton" data-required-flag="beta-ldc-battle" hidden><strong>LDC 排位赛</strong><small>每张 50 LDC · 每日 5 次</small></button><button type="button" class="mode-card" id="lobbyMiningEventButton" hidden><strong id="lobbyMiningEventTitle">至纯晶矿深潜</strong><small id="lobbyMiningEventSub">限时活动 · 策略深潜挖矿</small></button></div><p id="modeDeckStatus" class="home-mode-status" aria-live="polite"></p></section>
           </div>
           <aside class="home-signal-rail" aria-label="个人战绩"><div class="home-signal-heading"><span>个人战绩</span></div><div class="home-signal-best"><strong id="bestScore">000000</strong><span>个人最高分</span></div><label class="home-signal-mode"><span>模式</span><select id="bestScoreModeSelect" class="best-score-mode-select" aria-label="选择个人最高分模式"><option value="en">英文单人</option><option value="zh">中文单人</option><option value="ja">日语单人</option><option value="hell-en">地狱英文</option><option value="hell-zh">地狱无门</option><option value="beta-ldc-battle">LDC排位赛</option><option value="roguelike">矢量跃迁</option></select></label><div class="home-signal-readout"><span>最高连击</span><strong id="homeSignalStreak">—</strong></div><div class="home-signal-readout"><span>最佳准确率</span><strong id="homeSignalAccuracy">—</strong></div><div class="home-signal-readout"><span>最高波次</span><strong id="homeSignalWave">—</strong></div><button type="button" class="home-signal-tool" id="lobbyFlightSummaryButton" disabled><strong>起飞总结</strong><small>个人历史战绩与统计 · 登录后可查看</small></button></aside>
           <nav class="home-command-rail" aria-label="终端指令"><button id="gameGuideButton" class="feature-card" type="button"><span class="fc-sys" aria-hidden="true"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M8 7h8M8 10h8"/></svg><span>游戏说明</span><small class="feature-card-desc">玩法、计分与操作</small></button><button id="storyArchiveButton" class="feature-card" type="button" disabled><span class="fc-sys" aria-hidden="true"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5z"/><path d="M8 4v16M8 8h7M8 12h7M8 16h5"/></svg><span>剧情档案</span><small class="feature-card-desc">已解锁的远征档案</small><small class="feature-card-lock-hint" data-lock="auth">登录后解锁</small></button><button id="bossDesignButton" class="feature-card boss-design-entry" type="button" disabled><span class="fc-sys" aria-hidden="true"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5.5 4 4M4 20l3.5-1 10-10-3-3-10 10L4 20Z"/><path d="M12 4h8M18 2v4"/></svg><span>BOSS 设计工坊</span><small class="feature-card-desc">设计并回放你的 Boss</small><small class="feature-card-lock-hint" data-lock="planned">即将开放</small></button><button id="updateAnnouncementButton" class="feature-card" type="button"><span class="fc-sys" aria-hidden="true"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H4zM8 20h8M12 16v4"/><path d="m7 11 2-2 2 2 3-3 3 3"/></svg><span>更新公告</span><small class="feature-card-desc">版本改动与活动</small></button></nav>
@@ -948,6 +948,27 @@
         <button id="updateAnnouncementConfirm" class="primary-button" type="button">知道了</button>
       </div>
     </dialog>
+    <div id="miningEventOverlay" class="mining-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="miningEventTitle">
+      <div class="mining-panel">
+        <header class="mining-head">
+          <div>
+            <div class="mining-title-row">
+              <h2 id="miningEventTitle">至纯晶矿深潜</h2>
+              <span id="miningEventBadge" class="mining-badge">活动</span>
+            </div>
+            <p id="miningEventLore" class="mining-lore"></p>
+          </div>
+          <div class="mining-tabs">
+            <button id="miningTabStages" type="button" class="mining-tab-btn active">矿区探索</button>
+            <button id="miningTabBoard" type="button" class="mining-tab-btn">晶矿榜</button>
+            <button id="miningGuideButton" type="button" class="mining-tab-btn">勘探图鉴</button>
+            <button id="miningMuteButton" type="button" class="mining-tab-btn">音效: 开</button>
+            <button id="miningCloseButton" type="button" class="mining-btn">关闭</button>
+          </div>
+        </header>
+        <div id="miningEventBody"></div>
+      </div>
+    </div>
     <textarea id="hanziInput" class="hanzi-ime-input" rows="1" wrap="off" inputmode="none" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="-1" readonly aria-label="中文模式输入区" hidden></textarea>
   </body>
 </html>
