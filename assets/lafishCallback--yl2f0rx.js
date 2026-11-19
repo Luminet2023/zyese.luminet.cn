@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill-B5Qt9EMX.js";const e=new URLSearchParams(location.search);history.replaceState(null,"",location.pathname);window.opener?.postMessage({type:"zyese-lafish-auth",state:e.get("state"),issuer:e.get("iss"),code:e.get("code"),error:e.has("error")},location.origin);window.close();

@@ -19,9 +19,10 @@
     <meta name="twitter:description" content="输入英文单词或中文词语、成语，逐字发射，挑战每日排行和最高分。" />
     <meta name="twitter:image" content="https://zyese.xyz/og-image.png" />
     <title>Zyese - 打字射击</title>
-    <script type="module" crossorigin src="/assets/game-9-vTjc6b.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-2vsW9xDN.js">
-    <link rel="stylesheet" crossorigin href="/assets/game-CkjawumM.css">
+    <script type="module" crossorigin src="/assets/game-DJ3ibV7T.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+    <link rel="modulepreload" crossorigin href="/assets/projectile-impact-effects-1DMCc69Q.js">
+    <link rel="stylesheet" crossorigin href="/assets/game-BJafnpyK.css">
   </head>
   <body>
     <div id="gameIntroScreen" class="game-intro-screen" aria-label="游戏开始界面" hidden>
@@ -220,6 +221,19 @@
             <span id="waveAnnouncementDetail">敌方编队正在逼近</span>
           </div>
         <div id="menuOverlay" class="home-terminal overlay overlay-menu" aria-label="Zyese 母舰指挥台">
+          <section id="lafishLobby" class="lafish-lobby" hidden>
+            <h1>打飞机 · 金币红包</h1>
+            <p>普通英文模式。每击毁 15 个有效目标获得 20 金币，最多 10,000 金币。每金币折合 0.01 LDC 或 🐟，以红包币种为准。</p>
+            <p>每人一次有效机会。掉线后可恢复原局；主动退出会用掉本次机会。</p>
+            <p id="lafishLobbyStatus" role="status">正在连接红包站…</p>
+            <div class="lafish-actions">
+              <button id="lafishLogin" class="primary-button" type="button" hidden>用 Luminet Auth 登录</button>
+              <button id="lafishSiteLogin" class="secondary-button" type="button" hidden>登录红包站</button>
+              <button id="lafishPlay" class="primary-button" type="button" hidden>开始游戏</button>
+              <button id="lafishRefresh" class="secondary-button" type="button" hidden>刷新活动状态</button>
+              <button id="lafishLobbyClaim" class="primary-button" type="button" hidden>领取红包</button>
+            </div>
+          </section>
           <section class="home-mission-panel" aria-label="主任务">
             <div class="home-title-lockup">
               <div class="hero-title-wrap">
@@ -610,6 +624,10 @@
             </div>
             <div class="result-grid-legacy" hidden><strong id="finalWave">001</strong><strong id="finalStreak">0</strong><strong id="finalAccuracy">100%</strong></div>
             <p id="uploadStatus" class="upload-status" aria-live="polite">成绩将在本局结束后上传</p>
+            <div id="lafishResult" class="lafish-result" hidden>
+              <p id="lafishResultStatus" role="status"></p>
+              <button id="lafishClaim" class="primary-button" type="button" hidden>领取红包</button>
+            </div>
             <div id="signaturePanel" class="signature-panel" hidden>
               <strong>前十榜单签名</strong>
               <p>今日榜和总榜签名相互独立；同时进入两个榜单时需要分别保存。</p>
